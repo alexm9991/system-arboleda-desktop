@@ -1,14 +1,12 @@
 package vista;
 
 import conexion.conexionMensaje;
-import java.awt.Image;
+import java.awt.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+import controlador.CtrLogin;
 
 /**
  * @author jorge
@@ -49,32 +47,36 @@ public class VstLogin extends VstBase {
                 image.getImage().getScaledInstance(labelName.getWidth(), labelName.getHeight(), Image.SCALE_DEFAULT));
         labelName.setIcon(icon);
         this.repaint();
-
     }
 
     public void Validarusuario() {
-        int resultado = 0;
-        String password = String.valueOf(txt_password.getPassword());
-        String usuario = txt_email.getText();
-        String SQL = "select email,password from users where email='" + usuario + "' and password='"
-                + password + "' and state_record = 'ACTIVAR'";
-
-        try {
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(SQL);
-            if (rs.next()) {
-                resultado = 1;
-                if (resultado == 1) {
-                    VstMenu menuPrincipal = new VstMenu();
-                    menuPrincipal.setVisible(true);
-                    this.dispose();
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Error de Acceso: Usuario no registrado");
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
-        }
+//        
+        validarUsuario();
+    
+    }
+        
+        
+//        String password = String.valueOf(txt_password.getPassword());
+//        String usuario = txt_email.getText();
+////        String SQL = "select email,password from users where email='" + usuario + "' and password='"
+////                + password + "' and state_record = 'ACTIVAR'";
+//
+////        try {
+////            Statement st = con.createStatement();
+////            ResultSet rs = st.executeQuery(SQL);
+////            if (rs.next()) {
+////                resultado = 1;
+////                if (resultado == 1) {
+////                    VstMenu menuPrincipal = new VstMenu();
+////                    menuPrincipal.setVisible(true);
+////                    this.dispose();
+////                }
+////            } else {
+////                JOptionPane.showMessageDialog(null, "Error de Acceso: Usuario no registrado");
+////            }
+////        } catch (Exception e) {
+////            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
+////        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -124,6 +126,7 @@ public class VstLogin extends VstBase {
 
         txt_password.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
+        btn_iniciar.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         btn_iniciar.setText("Login");
         btn_iniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -205,7 +208,7 @@ public class VstLogin extends VstBase {
             pnl_loginPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_loginPrincipalLayout.createSequentialGroup()
                 .addComponent(pnl_barraMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addComponent(lbl_email)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
