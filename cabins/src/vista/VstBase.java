@@ -19,10 +19,9 @@ public class VstBase extends javax.swing.JFrame {
         setResizable(false);
         setSize(600, 450);
         setLocationRelativeTo(null);
-        setVisible(true);
         ImageIcon icono = new ImageIcon("src/assets/logo.jpg");
         this.setIconImage(icono.getImage());
-        bordePantalla();
+        
     }
 
     public void bordePantalla() {

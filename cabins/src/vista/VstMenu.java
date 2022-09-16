@@ -103,6 +103,11 @@ public class VstMenu extends VstBase {
                 btn_gestionServiciosMouseExited(evt);
             }
         });
+        btn_gestionServicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_gestionServiciosActionPerformed(evt);
+            }
+        });
 
         lbl_gestionServicios.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         lbl_gestionServicios.setText("Gestión de Servicios");
@@ -335,6 +340,11 @@ public class VstMenu extends VstBase {
     private void btn_gestionUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_gestionUsuariosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_gestionUsuariosActionPerformed
+
+    private void btn_gestionServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_gestionServiciosActionPerformed
+        VstServicios vstServicios = new VstServicios();
+        vstServicios.setVisible(true);
+    }//GEN-LAST:event_btn_gestionServiciosActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

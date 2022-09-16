@@ -1,6 +1,6 @@
 package vista;
 
-import conexion.Conexion;
+import conexion.conexionMensaje;
 import controlador.CtrServicios;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -57,7 +57,7 @@ public class VstServicios extends VstBase {
     }
 
     public void guardarImagenDB(MdlServicios servicio) {
-        Conexion conectar = new Conexion();
+        conexionMensaje conectar = new conexionMensaje();
 
         try {
 
@@ -101,10 +101,11 @@ public class VstServicios extends VstBase {
                 mdlServicio = lista.get(posicion);
             }
         }
-
-        llenarDatos(mdlServicio);
         desocultarM();
         ocultarC();
+        llenarDatos(mdlServicio);
+        consultar_precios(mdlServicio);
+
     }
 
     //OBTIENE LOS DATOS DE LA TABLA Y LOS MUESTRA EN LOS CAMPOS DE LA INTERFAZ
@@ -242,7 +243,8 @@ public class VstServicios extends VstBase {
         txt_precioN.setText("");
         lbl_imagen.setIcon(null);
         limpiarTablaImagenTemporal();
-        ocultarMG();
+        btn_modificar.setEnabled(false);
+        btn_guardar.setEnabled(false);
         desocultarC();
     }
 
@@ -260,7 +262,8 @@ public class VstServicios extends VstBase {
                 btn_eliminar.setEnabled(false);
             } else if (eleccion == JOptionPane.NO_OPTION) {
             }
-        } if (lbl == "t"){
+        }
+        if (lbl == "t") {
             lbl_imagen.setIcon(null);
             lbl = "false";
             btn_eliminar.setEnabled(false);
@@ -304,21 +307,22 @@ public class VstServicios extends VstBase {
         btn_crear.setEnabled(true);
     }
 
-    public void ocultarC() {
-        btn_crear.setEnabled(false);
-    }
-
     public void desocultarM() {
         btn_modificar.setEnabled(true);
+    }
+
+    public void ocultarC() {
+        btn_crear.setEnabled(false);
     }
 
     public void ocultarE() {
         btn_eliminar.setEnabled(false);
     }
 
-    public void ocultarMG() {
+    public void ocultarMGE() {
         btn_modificar.setEnabled(false);
         btn_guardar.setEnabled(false);
+        btn_eliminar.setEnabled(false);
     }
 
     //EVENTOS DE BOTONES MINIMIZAR Y CERRAR
@@ -347,33 +351,28 @@ public class VstServicios extends VstBase {
         setExtendedState(ICONIFIED);
     }
 
-    public void spinner(){
+    public void spinner() {
         SpinnerNumberModel m = new SpinnerNumberModel();
         m.setMaximum(30);
-        m.setMinimum(0); 
+        m.setMinimum(0);
         spn_cantidad.setModel(m);
     }
-    
+
     public void inicio() {
+        ocultarMGE(); 
         setLocationRelativeTo(null);
-        ocultarMG();
         consultar();
         spinner();
-        
-        //setSize(1031, 630);
         bordePantalla();
         setResizable(false);
-        //setLocationRelativeTo(null);
-        setTitle("Gestión de Servicios");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        ocultarE();
+
         modelo.addColumn("Url");
         tbl_imagen.setModel(modelo);
     }
 
     public VstServicios() {
         initComponents();
-        //setLocationRelativeTo(null);
         inicio();
     }
 
@@ -942,6 +941,8 @@ public class VstServicios extends VstBase {
 
     private void lbl_salirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_salirMouseClicked
         cerrarVentana(evt);
+        VstMenu menu = new VstMenu();
+        menu.setVisible(true);
     }//GEN-LAST:event_lbl_salirMouseClicked
 
     private void lbl_minimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_minimizarMouseClicked
