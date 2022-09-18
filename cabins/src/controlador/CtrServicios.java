@@ -57,20 +57,29 @@ public class CtrServicios {
         return lista_imagen;
     }
 
-    //CONSULTAR PRECIOS DE ACUERDO AL ID SELECCIONADO
+    //CONSULTAR PRECIOS Y TOTAL DE PERSONAS, DE ACUERDO AL ID SELECCIONADO
     public void consultarPrecios(MdlServicios servicio) {
         conexionMensaje conectar = new conexionMensaje();
-        VstServicios vst = new VstServicios();
-        ResultSet rs;
-        String sql = "select  from detail_services where tittle = '" + servicio.getNombre_servicio() + "'";
+        ResultSet rs, rss, rsss;
+        String sql = "select price from individual_for_services where services_id = " + servicio.getId() + " and types_individuals_id = 1";
+        String sqlDos = "select price from individual_for_services where services_id = " + servicio.getId() + " and types_individuals_id = 2";
+        String sqlTres = "select total_individuals from individual_for_services where services_id = " + servicio.getId();
         rs = conectar.consultar(sql);
+        rss = conectar.consultar(sqlDos);
+        rsss = conectar.consultar(sqlTres);
+        
         try {
 
             while (rs.next()) {
-                servicio.setId(rs.getInt("id"));
+                servicio.setP_adulto(rs.getInt("price"));
+            }
+            while (rss.next()) {
+                servicio.setP_nino(rs.getInt("price"));
+            }
+            while (rsss.next()) {
+                servicio.setTotal(rs.getInt("total_individuals"));
             }
 
-            //guardarImagenCtr(servicio);
         } catch (Exception error) {
             JOptionPane.showMessageDialog(null, "Error en crear servicio id ds" + error);
         }
@@ -130,37 +139,42 @@ public class CtrServicios {
         conexionMensaje conectar = new conexionMensaje();
         ResultSet rs, rss, rsss;
         String sql = "select id from services where tittle = '" + servicio.getNombre_servicio() + "'";
-        String sqlDos = "select id from types_individuals where id = 1";
-        String sqlTres = "select id from types_individuals where id = 2";
+        String sqlDos = "select id from types_individuals where tittle = 'Adulto'";
+        String sqlTres = "select id from types_individuals where tittle = 'Niño'";
         rs = conectar.consultar(sql);
         rss = conectar.consultar(sqlDos);
         rsss = conectar.consultar(sqlTres);
         try {
 
-            while (rs.next()) {
-                servicio.setId(rs.getInt("id"));
-            }
+            //while (rs.next()) {
+           //     servicio.setId(rs.getInt("id"));
+          //  }
+            System.out.println("squi");
             while (rss.next()) {
                 servicio.setIdFUno(rs.getInt("id"));
+                System.out.println("adentro");
             }
             while (rsss.next()) {
                 servicio.setIdFDos(rs.getInt("id"));
+                System.out.println("adentro dos");
             }
 
-            String sqlgu = "insert into individual_for_services(total_individuals,services_id,types_individuals_id,)"
-                    + "values(" + servicio.getTotal() + "','" + servicio.getId() + "','" + servicio.getIdFUno() + ")";
+            String sqlgu = "insert into individual_for_services(total_individuals,price,services_id,types_individuals_id)"
+                    + "values(" + servicio.getTotal() + "','" + servicio.getP_adulto() + "','" + servicio.getId() + "','" + servicio.getIdFUno() + ")";
 
-            String sqlguDos = "insert into individual_for_services(total_individuals,services_id,types_individuals_id,)"
-                    + "values(" + servicio.getTotal() + "','" + servicio.getId() + "','" + servicio.getIdFDos() + ")";
+            String sqlguDos = "insert into individual_for_services(total_individuals,price,services_id,types_individuals_id)"
+                    + "values(" + servicio.getTotal() + "','" + servicio.getP_nino() + "','" + servicio.getId() + "','" + servicio.getIdFDos() + ")";
+            System.out.println("SQL" + sqlgu + 
+                    "\n El otro" + sqlguDos);
 
             if (conectar.ejecutar(sqlgu) && conectar.ejecutar(sqlguDos)) {
                 System.out.println("Precios registrados");
 
             } else {
-                JOptionPane.showMessageDialog(null, "El servicio no fue creado");
+                JOptionPane.showMessageDialog(null, "El precio no fue creado");
             }
         } catch (Exception error) {
-            JOptionPane.showMessageDialog(null, "Error en crear servicio id s" + error);
+            JOptionPane.showMessageDialog(null, "Error en crear servicio, precios" + error);
         }
     }
 
@@ -183,10 +197,10 @@ public class CtrServicios {
             }
 
             String sqlgu = "insert into rules(tittle,description,age_min,age_max,people_for_services_id)"
-                    + "values('ADULTO','PERSONA ADULTA JEJE','8','100'," + servicio.getIdFUno() + ")";
+                    + "values('ADULTO','Precio de persona adulta es desde los 8 hasta los 100 años de edad','8','100'," + servicio.getIdFUno() + ")";
 
             String sqlguDos = "insert into rules(tittle,description,age_min,age_max,people_for_services_id)"
-                    + "values('NIÑO','PERSONA NIÑO JEJE','3','7'," + servicio.getIdFDos() + ")";
+                    + "values('NIÑO','Precio de niños es desde los 3 hasta los 7 años de edad','3','7'," + servicio.getIdFDos() + ")";
 
             if (conectar.ejecutar(sqlgu) && conectar.ejecutar(sqlguDos)) {
                 System.out.println("Reglas registradas");
@@ -209,8 +223,8 @@ public class CtrServicios {
         try {
             if (conectar.ejecutar(sqlgu)) {
 
-                insertarDS(servicio);
-                insertarRe(servicio);
+                //insertarDS(servicio);
+                //insertarRe(servicio);
                 insertarIFS(servicio);
                 insertarRu(servicio);
 

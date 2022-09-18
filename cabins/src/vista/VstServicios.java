@@ -122,13 +122,17 @@ public class VstServicios extends VstBase {
             }
         }
 
-        consultar_imagen();
+        //consultar_imagen();
     }
+//nesesita metodo
 
     public void consultar_precios(MdlServicios servicio) {
-
+        CtrServicios ctrServicios = new CtrServicios();
+        
+        ctrServicios.consultarPrecios(servicio);
         txt_precioA.setText(String.valueOf(servicio.getP_adulto()));
         txt_precioN.setText(String.valueOf(servicio.getP_nino()));
+        spn_cantidad.setValue(String.valueOf(servicio.getTotal()));
     }
 
     //CONSULTAR IMAGENES EN LA DB
@@ -242,9 +246,10 @@ public class VstServicios extends VstBase {
         txt_precioA.setText("");
         txt_precioN.setText("");
         lbl_imagen.setIcon(null);
-        limpiarTablaImagenTemporal();
         btn_modificar.setEnabled(false);
         btn_guardar.setEnabled(false);
+        spn_cantidad.setValue(((SpinnerNumberModel) spn_cantidad.getModel()).getMinimum());
+        limpiarTablaImagenTemporal();
         desocultarC();
     }
 
@@ -359,7 +364,7 @@ public class VstServicios extends VstBase {
     }
 
     public void inicio() {
-        ocultarMGE(); 
+        ocultarMGE();
         setLocationRelativeTo(null);
         consultar();
         spinner();
@@ -627,7 +632,15 @@ public class VstServicios extends VstBase {
             new String [] {
                 "Nombre", "Descripción", "Estado", "Fecha de creación", "Fecha de modificación"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tbl_tabla.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_tablaMouseClicked(evt);
