@@ -5,7 +5,7 @@
  */
 package Vista;
 
-import Conexion.conexionMensaje;
+import conexion.conexionMensaje;
 import Controlador.CtrlProductos;
 import Modelo.MdlProductos;
 import java.awt.Color;

@@ -1,6 +1,6 @@
 package Vista;
 
-import Conexion.conexionMensaje;
+import conexion.conexionMensaje;
 import Controlador.CtrlProductos;
 import Vista.VstProductos;
 import Modelo.MdlProductos;
@@ -18,8 +18,8 @@ public class VstEditar_Producto extends javax.swing.JFrame {
     File archivo;
     byte[] byteImg;
     CtrlProductos gestion = new CtrlProductos();
-    Conexion.conexionMensaje con = new conexionMensaje();
-    Conexion.conexionMensaje connect = new conexionMensaje();
+    conexion.conexionMensaje con = new conexionMensaje();
+    conexion.conexionMensaje connect = new conexionMensaje();
     ArrayList<MdlProductos> listaProductosActualizar = new ArrayList();
     Long datetime = System.currentTimeMillis(); 
         Timestamp timestamp = new Timestamp(datetime);

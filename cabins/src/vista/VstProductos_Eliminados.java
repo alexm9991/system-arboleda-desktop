@@ -5,7 +5,7 @@
  */
 package Vista;
 
-import Conexion.conexionMensaje;
+import conexion.conexionMensaje;
 import Controlador.CtrlProductos;
 import Modelo.MdlProductos;
 import VstRecursos.RenderTable;
@@ -24,8 +24,8 @@ DefaultTableModel diseñoTablaEliminados=new DefaultTableModel(){public boolean 
             return false;}
     };
     ArrayList<MdlProductos> listaProductosEliminado = new ArrayList();
-    Conexion.conexionMensaje con = new conexionMensaje();
-    Conexion.conexionMensaje connect = new conexionMensaje();
+    conexion.conexionMensaje con = new conexionMensaje();
+    conexion.conexionMensaje connect = new conexionMensaje();
     int idRetornar = 0;
     
     public VstProductos_Eliminados() {
