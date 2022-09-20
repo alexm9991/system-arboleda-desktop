@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author SENA
  */
-public class VstProductos_Eliminados extends javax.swing.JFrame {
+public class VstProductos_Eliminados extends vista.VstBase {
 DefaultTableModel diseñoTablaEliminados=new DefaultTableModel(){public boolean isCellEditable(int row, int column){
             return false;}
     };
@@ -36,7 +36,7 @@ public void salirExited(java.awt.event.MouseEvent evt){
            lbl_salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/errorBlanco.png")));
         }
 public void cerrarVentana(java.awt.event.MouseEvent evt){
-     this.setVisible(false);
+     System.exit(0);
 }
 
 public void minimizarEntered(java.awt.event.MouseEvent evt){
@@ -178,7 +178,6 @@ diseñoTablaEliminados.setRowCount(0);
         lbl_minimizar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tdlDatosEliminados.setModel(new javax.swing.table.DefaultTableModel(
@@ -196,7 +195,7 @@ diseñoTablaEliminados.setRowCount(0);
         });
         jScrollPane2.setViewportView(tdlDatosEliminados);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 610, 360));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 550, 360));
 
         btn_atras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/atrasBlanco.png"))); // NOI18N
         btn_atras.setContentAreaFilled(false);
@@ -227,7 +226,7 @@ diseñoTablaEliminados.setRowCount(0);
                 lbl_salirMouseExited(evt);
             }
         });
-        getContentPane().add(lbl_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 0, 30, 30));
+        getContentPane().add(lbl_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 0, 30, 30));
 
         lbl_minimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/circuloBlanco.png"))); // NOI18N
         lbl_minimizar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -241,7 +240,7 @@ diseñoTablaEliminados.setRowCount(0);
                 lbl_minimizarMouseExited(evt);
             }
         });
-        getContentPane().add(lbl_minimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 0, 30, 30));
+        getContentPane().add(lbl_minimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 0, 30, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

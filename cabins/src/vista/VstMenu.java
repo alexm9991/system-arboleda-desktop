@@ -342,8 +342,8 @@ public class VstMenu extends VstBase {
     }//GEN-LAST:event_btn_gestionUsuariosActionPerformed
 
     private void btn_gestionProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_gestionProductosActionPerformed
-       this.setVisible (false);
-//        new vs ()  .  setVisible (true);
+      this.setVisible (false);
+        new Vista.VstProductos().setVisible (true);
     }//GEN-LAST:event_btn_gestionProductosActionPerformed
 
     public static void main(String args[]) {

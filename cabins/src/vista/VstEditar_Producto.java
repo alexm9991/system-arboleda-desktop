@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 import javax.swing.*;
 
 
-public class VstEditar_Producto extends javax.swing.JFrame {
+public class VstEditar_Producto extends javax.swing.JFrame  {
 
     JFileChooser seleccionado = new JFileChooser();
     File archivo;
@@ -91,7 +91,6 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
         mdlproducto.setRutaImg(lblruta.getText());
         ctrlproducto.EditarProducto(mdlproducto);
         this.setVisible(false);
-        VstProductos productos = new VstProductos();
     }
 
     public void CambiarImagen() {
@@ -111,13 +110,13 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
 
     
     public void Confirmacion() {
-
-        int confirmacion = JOptionPane.showConfirmDialog(this, "¿Desea guardar los cambios?");
-
-        if (confirmacion == 0) {
+ int i = JOptionPane.showConfirmDialog(this, "¿Desea guardar los cambios?", "CONFIRMACIÓN", i = 0);
+        if (i == JOptionPane.YES_OPTION) {
             editarProducto();
-        }
-    }
+        }else if (i == 1 || i == 2) {
+            JOptionPane.showMessageDialog(null, "Producto No Editado");
+       }
+    } 
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -143,12 +142,17 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         lbl_salir = new javax.swing.JLabel();
         lbl_minimizar = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(714, 520));
-        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1105, 550));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -156,7 +160,7 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
 
         jLabel2.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         jLabel2.setText("Nombre del producto:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 230, 30));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 230, 30));
 
         TxtNombreProductoEditar.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         TxtNombreProductoEditar.setBorder(null);
@@ -170,11 +174,11 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
                 TxtNombreProductoEditarKeyTyped(evt);
             }
         });
-        jPanel1.add(TxtNombreProductoEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 240, 30));
+        jPanel1.add(TxtNombreProductoEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 220, 30));
 
         jLabel3.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         jLabel3.setText("Precio:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 230, 30));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 230, 30));
 
         TxtPrecioProductoEditar.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         TxtPrecioProductoEditar.setBorder(null);
@@ -188,18 +192,18 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
                 TxtPrecioProductoEditarKeyTyped(evt);
             }
         });
-        jPanel1.add(TxtPrecioProductoEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 240, 30));
+        jPanel1.add(TxtPrecioProductoEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 220, 30));
 
         jLabel4.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         jLabel4.setText("Descripción:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 230, 30));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 230, 30));
 
         lblImagen.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(lblImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 370, 330));
+        jPanel1.add(lblImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, 450, 290));
 
         jLabel6.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         jLabel6.setText("Imagen:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, 80, 30));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, 80, 30));
 
         BtnAceptarEditar.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         BtnAceptarEditar.setText("Actualizar");
@@ -208,7 +212,7 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
                 BtnAceptarEditarActionPerformed(evt);
             }
         });
-        jPanel1.add(BtnAceptarEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 410, 100, 40));
+        jPanel1.add(BtnAceptarEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 430, 120, 40));
 
         BtnCancelarEditar.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         BtnCancelarEditar.setText("Cancelar");
@@ -217,7 +221,7 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
                 BtnCancelarEditarActionPerformed(evt);
             }
         });
-        jPanel1.add(BtnCancelarEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, 100, 40));
+        jPanel1.add(BtnCancelarEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, 100, 40));
 
         btnCambiarImg.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         btnCambiarImg.setText("Cambiar imagen");
@@ -226,7 +230,7 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
                 btnCambiarImgActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCambiarImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 150, 30));
+        jPanel1.add(btnCambiarImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 180, 30));
         jPanel1.add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 20, 20));
 
         lblfecha.addContainerListener(new java.awt.event.ContainerAdapter() {
@@ -234,18 +238,18 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
                 lblfechaComponentAdded(evt);
             }
         });
-        jPanel1.add(lblfecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 420, 180, 20));
+        jPanel1.add(lblfecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 420, 180, 20));
 
         txtDescripcion.setColumns(20);
         txtDescripcion.setRows(5);
         txtDescripcion.setBorder(null);
         jScrollPane1.setViewportView(txtDescripcion);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 250, 40));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 220, 40));
 
         jLabel5.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         jLabel5.setText("Fecha de modificación:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 420, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 420, -1, -1));
 
         lblruta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lblruta.addContainerListener(new java.awt.event.ContainerAdapter() {
@@ -253,12 +257,25 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
                 lblrutaComponentAdded(evt);
             }
         });
-        jPanel1.add(lblruta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 250, 30));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 240, 10));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 240, 20));
-        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 250, 20));
+        jPanel1.add(lblruta, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 250, 30));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 250, 10));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 250, 20));
+        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 250, 20));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 700, 470));
+        jLabel7.setFont(new java.awt.Font("Verdana", 1, 16)); // NOI18N
+        jLabel7.setText("EDITAR PRODUCTO:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/firma.png"))); // NOI18N
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 40, 30));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/signoDolares.png"))); // NOI18N
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 30, 30));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/descripcion.png"))); // NOI18N
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 40, 40));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, 810, 480));
 
         lbl_salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/errorBlanco.png"))); // NOI18N
         lbl_salir.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -272,7 +289,7 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
                 lbl_salirMouseExited(evt);
             }
         });
-        getContentPane().add(lbl_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 0, 30, 30));
+        getContentPane().add(lbl_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 0, 30, 30));
 
         lbl_minimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/circuloBlanco.png"))); // NOI18N
         lbl_minimizar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -286,7 +303,10 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
                 lbl_minimizarMouseExited(evt);
             }
         });
-        getContentPane().add(lbl_minimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 0, 30, 30));
+        getContentPane().add(lbl_minimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 0, 30, 30));
+
+        jPanel2.setBackground(new java.awt.Color(102, 153, 255));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 520));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -386,12 +406,17 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
     public javax.swing.JTextField TxtNombreProductoEditar;
     public javax.swing.JTextField TxtPrecioProductoEditar;
     private javax.swing.JButton btnCambiarImg;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;

@@ -7,8 +7,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 
 public class CtrlProductos {
@@ -67,10 +65,10 @@ public class CtrlProductos {
         return listaProductosEliminado;
     }
      
-      public MdlProductos consultarProducto(MdlProductos producto, int idx) {
+      public MdlProductos consultarProducto(MdlProductos producto, int idRetornado) {
         conexionMensaje conexion = new conexionMensaje();
         ResultSet rs;
-        String sql = "select * from products where id="+idx;
+        String sql = "select * from products where id="+idRetornado;
         System.out.println("Consulta de Productos : " + sql);
         try {
             rs = conexion.consultar(sql);
@@ -89,9 +87,9 @@ public class CtrlProductos {
         
     }
       
-      public void eliminar(MdlProductos producto, int idx){
+      public void eliminar(MdlProductos producto, int idRetornado){
         conexionMensaje conexion = new conexionMensaje();
-        String sql = "update products set state_record = 'desactivar' where id="+idx;
+        String sql = "update products set state_record = 'desactivar' where id="+idRetornado;
         System.out.println("Consulta de Productos : " + sql);
         try {
             if(conexion.ejecutar(sql)){
@@ -105,9 +103,9 @@ public class CtrlProductos {
         }
       }
        
-      public void restaurar(MdlProductos producto, int idx){
+      public void restaurar(MdlProductos producto, int idRetornado){
         conexionMensaje conexion = new conexionMensaje();
-        String sql = "update products set state_record = 'activar' where id="+idx;
+        String sql = "update products set state_record = 'activar' where id="+idRetornado;
         System.out.println("Consulta de Productos : " + sql);
         try {
             if(conexion.ejecutar(sql)){
@@ -121,9 +119,9 @@ public class CtrlProductos {
         }
       }
       
-      public void borrar(MdlProductos producto, int idx){
+      public void borrar(MdlProductos producto, int idRetornado){
         conexionMensaje conexion = new conexionMensaje();
-        String sql = "update products set state_record = 'borrar' where id="+idx;
+        String sql = "update products set state_record = 'borrar' where id="+idRetornado;
         System.out.println("Consulta de Productos : " + sql);
         try {
             if(conexion.ejecutar(sql)){
@@ -137,22 +135,7 @@ public class CtrlProductos {
         }
       }
       
-      public String fecha(){
-        Calendar fecha = new GregorianCalendar();
-
-    String anio = Integer.toString(fecha.get(Calendar.YEAR));
-    String meses= Integer.toString(fecha.get(Calendar.MONTH));
-//    String mes = Integer.toString(fecha.get(Calendar.MONTH));
-    String dia = Integer.toString(fecha.get(Calendar.DATE));
-    String hora = Integer.toString(fecha.get(Calendar.HOUR));
-    String min = Integer.toString(fecha.get(Calendar.MINUTE));
-    String seg = Integer.toString(fecha.get(Calendar.SECOND));
-
-    String fechaC = anio + "-" + meses + "-" + dia + " " + hora + ":" + min + ":" + seg;
-        return fechaC;
-    }
-   
-      // Función para que la imagen se ajuste al tamaño del label 
+// Función para que la imagen se ajuste al tamaño del label 
     public byte[] AbrirImagen(File archivo) {
         byte[] byteImg = new byte[1280 * 1080];
         try {
@@ -191,8 +174,8 @@ public class CtrlProductos {
     public void guardarProductos(MdlProductos mdlProductos) {
         conexionMensaje conexion = new conexionMensaje();
         ResultSet rsgu;
-        int i = JOptionPane.showConfirmDialog(null, "Seguro Quieres Guardar El Producto?", "ADVERTENCIA", i = 0);
-        if (i == JOptionPane.YES_OPTION) {
+//        int i = JOptionPane.showConfirmDialog(null, "Seguro Quieres Guardar El Producto?", "ADVERTENCIA", i = 0);
+//        if (i == JOptionPane.YES_OPTION) {
             try {
                 String sqlgu = "select * from products where name_product = '" + mdlProductos.getNameProduct() + "'";
                 rsgu = conexion.consultar(sqlgu);
@@ -205,16 +188,16 @@ public class CtrlProductos {
                             + "values('" + mdlProductos.getNameProduct() + "','" + mdlProductos.getDescripcion() + "','"
                             + mdlProductos.getPrice() + "','" + nuevo +"','"+mdlProductos.getCreateTime()+"','"
                             + mdlProductos.getStateRecord() + "')";
-                    System.out.print(mdlProductos.getCreateTime());
+                   
                     conexion.ejecutar(sqlguardar);
                 }
             } catch (Exception error) {
                 JOptionPane.showMessageDialog(null, " Error En Guardar Productos ");
                 System.out.print(error);
             }
-        } else if (i == 1 || i == 2) {
-            JOptionPane.showMessageDialog(null, "Producto No Agregado");
-        }
+//        } else if (i == 1 || i == 2) {
+//            JOptionPane.showMessageDialog(null, "Producto No Agregado");
+//        }
     }
 
      public void EditarProducto(MdlProductos mdlproducto) {
@@ -224,7 +207,7 @@ public class CtrlProductos {
                 + " decripcion = '" + mdlproducto.getDescripcion() + "', price = '" + mdlproducto.getPrice()
                 + "', update_time = '" + mdlproducto.getUpdateTime()+ "', picture = '"+ nuevo
                 + "' where id = " +mdlproducto.getId();
-        System.out.print(mdlproducto.getUpdateTime());
+    
         try {
             if (conexion.ejecutar(sqlp)) {
                 JOptionPane.showMessageDialog(null, "Se modificaron los datos satisfactoriamente");

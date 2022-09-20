@@ -9,7 +9,7 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class VstProductos extends javax.swing.JFrame {
+public class VstProductos extends vista.VstBase {
 
     DefaultTableModel diseñoTabla = new DefaultTableModel() {
         public boolean isCellEditable(int row, int column) {
@@ -150,7 +150,6 @@ diseñoTabla.setRowCount(0);
         jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btn_crear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/crearProductoBlanco.png"))); // NOI18N
@@ -184,7 +183,7 @@ diseñoTabla.setRowCount(0);
                 lbl_salirMouseExited(evt);
             }
         });
-        getContentPane().add(lbl_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 0, 30, 30));
+        getContentPane().add(lbl_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 0, 30, 30));
 
         tdlDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -209,7 +208,7 @@ diseñoTabla.setRowCount(0);
         });
         jScrollPane2.setViewportView(tdlDatos);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 570, 320));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 550, 320));
 
         lbl_minimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/circuloBlanco.png"))); // NOI18N
         lbl_minimizar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -223,7 +222,7 @@ diseñoTabla.setRowCount(0);
                 lbl_minimizarMouseExited(evt);
             }
         });
-        getContentPane().add(lbl_minimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 0, 30, 30));
+        getContentPane().add(lbl_minimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 0, 30, 30));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/refresh.png"))); // NOI18N
         jButton2.setToolTipText("Refrescar");
