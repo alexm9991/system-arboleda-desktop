@@ -2,7 +2,7 @@ package Vista;
 
 import Controlador.CtrlProductos;
 import Modelo.MdlProductos;
-import Conexion.conexionMensaje;
+import conexion.conexionMensaje;
 import VstRecursos.RenderTable;
 import java.awt.Color;
 import java.util.*;
@@ -17,8 +17,8 @@ public class VstProductos extends javax.swing.JFrame {
         }
     };
     ArrayList<MdlProductos> listaProductos = new ArrayList();
-    Conexion.conexionMensaje con = new conexionMensaje();
-    Conexion.conexionMensaje connect = new conexionMensaje();
+    conexion.conexionMensaje con = new conexionMensaje();
+    conexion.conexionMensaje connect = new conexionMensaje();
     int filaseleccionada;
 
     int idRetornar = 0;

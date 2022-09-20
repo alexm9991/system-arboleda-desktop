@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vista;
 
-import Conexion.conexionMensaje;
+import conexion.conexionMensaje;
 import Controlador.CtrlProductos;
 import Modelo.MdlProductos;
 import VstRecursos.RenderTable;
@@ -24,8 +19,8 @@ DefaultTableModel diseñoTablaEliminados=new DefaultTableModel(){public boolean 
             return false;}
     };
     ArrayList<MdlProductos> listaProductosEliminado = new ArrayList();
-    Conexion.conexionMensaje con = new conexionMensaje();
-    Conexion.conexionMensaje connect = new conexionMensaje();
+    conexion.conexionMensaje con = new conexionMensaje();
+    conexion.conexionMensaje connect = new conexionMensaje();
     int idRetornar = 0;
     
     public VstProductos_Eliminados() {
@@ -85,10 +80,8 @@ public void atrasEntered(java.awt.event.MouseEvent evt){
             tdlDatosEliminados.setValueAt(listaProductosEliminado.get(consecutivo).getPrice(), consecutivo,1);
             tdlDatosEliminados.setValueAt(listaProductosEliminado.get(consecutivo).getId(), consecutivo,2);
             tdlDatosEliminados.setValueAt(botonRestaurar, consecutivo,2);
-            tdlDatosEliminados.setValueAt(botonBorrar, consecutivo,3);
-            
+            tdlDatosEliminados.setValueAt(botonBorrar, consecutivo,3);       
         }
-
     }
     
     public void traerDato(int idx){
