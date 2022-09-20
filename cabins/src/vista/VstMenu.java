@@ -91,6 +91,11 @@ public class VstMenu extends VstBase {
                 btn_gestionProductosMouseExited(evt);
             }
         });
+        btn_gestionProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_gestionProductosActionPerformed(evt);
+            }
+        });
 
         btn_gestionServicios.setBackground(new java.awt.Color(194, 229, 242));
         btn_gestionServicios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/servicios.png"))); // NOI18N
@@ -335,6 +340,11 @@ public class VstMenu extends VstBase {
     private void btn_gestionUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_gestionUsuariosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_gestionUsuariosActionPerformed
+
+    private void btn_gestionProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_gestionProductosActionPerformed
+      this.setVisible (false);
+        new Vista.VstProductos().setVisible (true);
+    }//GEN-LAST:event_btn_gestionProductosActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
