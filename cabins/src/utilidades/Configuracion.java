@@ -1,4 +1,4 @@
-package configuracion;
+package utilidades;
 
 public interface Configuracion {
 
