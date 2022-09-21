@@ -10,6 +10,17 @@ import javax.swing.JOptionPane;
 
 public class conexionMensaje implements Conexion{
     
+     //conexion local
+    public static Connection nuevaConexion() {
+        try {
+            Connection cn = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
+            return cn;
+        } catch (SQLException e) {
+            System.out.println("Error en conexion local" + e);
+        }
+        return (null);
+    }
+    
 private static Connection con = null;
 
     static {
