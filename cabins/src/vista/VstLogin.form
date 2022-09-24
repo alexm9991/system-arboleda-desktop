@@ -141,6 +141,9 @@
               <Font name="Verdana" size="12" style="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_passwordActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_iniciar">
           <Properties>
