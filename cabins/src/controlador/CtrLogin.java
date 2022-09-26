@@ -2,16 +2,14 @@
 package controlador;
 import conexion.conexionMensaje;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import vista.*;
 
 public class CtrLogin {
     conexionMensaje cc = new conexionMensaje();
-    CtrEncrip val = new CtrEncrip();
+    CtrEncrypt val = new CtrEncrypt();
     Connection con = conexionMensaje.getConnection();
     
 //   public int ValidarPssword (String usuario, String password)  {

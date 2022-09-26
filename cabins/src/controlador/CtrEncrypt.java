@@ -11,7 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
  *
  * @author SENA
  */
-public class CtrEncrip {
+public class CtrEncrypt {
       public String encryptPassword(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());
       }

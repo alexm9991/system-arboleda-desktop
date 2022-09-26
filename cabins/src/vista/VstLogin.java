@@ -1,17 +1,14 @@
 package vista;
 
-import controlador.CtrEncrip;
 import controlador.CtrLogin;
 import conexion.conexionMensaje;
 import java.awt.Image;
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import controlador.CtrEncrip;
+import controlador.CtrEncrypt;
 
 /**
  * @author jorge
@@ -221,7 +218,7 @@ public class VstLogin extends VstBase {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_iniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_iniciarActionPerformed
-       CtrEncrip val = new CtrEncrip();
+       CtrEncrypt val = new CtrEncrypt();
         if(txt_email.getText().isEmpty() & txt_password.getText().isEmpty()){
             JOptionPane.showMessageDialog(null,"Por favor Llene los campos");
         }else{          

@@ -2,7 +2,7 @@ package vista;
 
 import java.awt.Color;
 import java.awt.Component;
-
+import vista.VstGestionUsuarios;
 public class VstMenu extends VstBase {
 
     public VstMenu() {
@@ -101,6 +101,11 @@ public class VstMenu extends VstBase {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btn_gestionServiciosMouseExited(evt);
+            }
+        });
+        btn_gestionServicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_gestionServiciosActionPerformed(evt);
             }
         });
 
@@ -248,7 +253,7 @@ public class VstMenu extends VstBase {
                 .addGroup(pnl_menuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_menuPrincipalLayout.createSequentialGroup()
                         .addComponent(lbl_gestionProductos)
-                        .addContainerGap(55, Short.MAX_VALUE))
+                        .addContainerGap(67, Short.MAX_VALUE))
                     .addGroup(pnl_menuPrincipalLayout.createSequentialGroup()
                         .addComponent(lbl_gestionReportes)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -333,9 +338,14 @@ public class VstMenu extends VstBase {
     }//GEN-LAST:event_lbl_minimizarMouseEntered
 
     private void btn_gestionUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_gestionUsuariosActionPerformed
-        
-        
+        VstGestionUsuarios abrir = new VstGestionUsuarios();
+        abrir.setVisible(true);
     }//GEN-LAST:event_btn_gestionUsuariosActionPerformed
+
+    private void btn_gestionServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_gestionServiciosActionPerformed
+        VstServicios abrir = new VstServicios();
+        abrir.setVisible(true);
+    }//GEN-LAST:event_btn_gestionServiciosActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
