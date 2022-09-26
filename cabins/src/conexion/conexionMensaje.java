@@ -18,7 +18,7 @@ private static Connection con = null;
             con = DriverManager.getConnection(CONNECTION_URL, USERNAME, PASSWORD);
             if (con != null) {
                 System.out.println("Conexion exitosa");
-                JOptionPane.showMessageDialog(null, "Conexion exitosa");
+                
             } else {
                 System.out.println("Conexion fallida");
             }

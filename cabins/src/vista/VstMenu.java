@@ -333,7 +333,8 @@ public class VstMenu extends VstBase {
     }//GEN-LAST:event_lbl_minimizarMouseEntered
 
     private void btn_gestionUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_gestionUsuariosActionPerformed
-        // TODO add your handling code here:
+        
+        
     }//GEN-LAST:event_btn_gestionUsuariosActionPerformed
 
     public static void main(String args[]) {

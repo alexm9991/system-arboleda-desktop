@@ -5,28 +5,21 @@
  */
 package controlador;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
+
 /**
  *
  * @author SENA
  */
 public class CtrEncrip {
-     public String MD5(String md5){
-        
-        try {
-            java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
-            byte[] array = md.digest(md5.getBytes());
-            
-            StringBuffer sb = new StringBuffer();
-            for (int i = 0; i < array.length; i++) {
-                sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
-                
-            }
-            return sb.toString();
-        } catch (java.security.NoSuchAlgorithmException e) {
-            
-        }
-        
-        return null;
-    }
-    
+      public String encryptPassword(String password) {
+        return BCrypt.hashpw(password, BCrypt.gensalt());
+      }
+      
+      public boolean verifyPassword(String originalPassword, String hashpassword){
+         
+          return  BCrypt.checkpw(originalPassword, hashpassword);   
+      }
+      
+      
 }

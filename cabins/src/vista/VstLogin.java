@@ -11,6 +11,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import controlador.CtrEncrip;
 
 /**
  * @author jorge
@@ -223,9 +224,9 @@ public class VstLogin extends VstBase {
        CtrEncrip val = new CtrEncrip();
         if(txt_email.getText().isEmpty() & txt_password.getText().isEmpty()){
             JOptionPane.showMessageDialog(null,"Por favor Llene los campos");
-        }else{
+        }else{          
         String usuario = txt_email.getText();
-           String password = val.MD5(txt_password.getText());
+           String password = txt_password.getText();
             CtrLogin validar = new CtrLogin();
         if (validar.Validarusuario(usuario, password)==1){
             this.dispose();
