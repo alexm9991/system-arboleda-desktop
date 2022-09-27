@@ -30,16 +30,18 @@ public class CtrLogin {
 //   }
      
      public int Validarusuario(String usuario, String password)  {
-        
-      
-        int resultado = 0;
+              
+         int resultado = 0;       
         String SQL = "select email,password from users where email='" + usuario + "' and state_record = 'ACTIVAR'";
              
         try {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(SQL);
-            if (rs.next()) {              
-                   String resultado1 = rs.getNString(2);                          
+//            Ejecución de la consulta
+            if (rs.next()) {    
+//                Se guarda el password encriptado en una variable
+                   String resultado1 = rs.getNString(2);  
+//                   Validacion del password ingresado con el password encriptado
                  boolean conf = val.verifyPassword(password,resultado1);   
                 if (conf ==true) {
                     VstMenu menuPrincipal = new VstMenu();

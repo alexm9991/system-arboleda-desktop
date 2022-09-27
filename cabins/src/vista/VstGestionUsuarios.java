@@ -25,7 +25,7 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
      * Creates new form Gestion_Usuarios
      */
     public VstGestionUsuarios() {
-
+        Connection cn = conexionMensaje.getConnection();
         this.setUndecorated(true);
 
         initComponents();
@@ -41,7 +41,7 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
         getContentPane().setBackground(new Color(255, 255, 255));//Color Fondo del Jframe
 
         try {
-            Connection cn = conexionMensaje.getConnection();
+            
             PreparedStatement pst = cn.prepareStatement(
                     "select name, identification_number, phone_number from users where state_record = 'ACTIVAR' ");
 
@@ -75,14 +75,13 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
                 }
                 model.addRow(fila); //De esta forma estariamos agregando la fila que hayamos encontrado dentro del objeto model
             }
-            cn.close();
+            
         } catch (SQLException e) {
             System.err.println("ERROR al llenar tabla." + e);
             JOptionPane.showMessageDialog(null, "ERROR al mostrar informacion, Contacte al Administrador!");
         }
-
         tbl_tablaUsuarios.addMouseListener(new MouseAdapter() {
-
+            
             @Override //Vamos a sobreescribir un metodo de una clase existente, asi que escribimos el Override
             public void mouseClicked(MouseEvent e) { //Metodo Sobreescrito, con una variable u objeto del tipo MouseEvent en el cual va a guardar de manera temporal el evento asignado
 
@@ -100,7 +99,7 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
 
             }
         });
-
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -330,7 +329,7 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl_crearMouseClicked
 
     private void lbl_cerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_cerrarMouseClicked
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_lbl_cerrarMouseClicked
 
     private void lbl_cerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_cerrarMouseEntered

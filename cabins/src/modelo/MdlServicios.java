@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.Date;
+import java.util.List;
 
 public class MdlServicios {
 
@@ -9,14 +10,14 @@ public class MdlServicios {
     private String descripcion;
     private String estado;
     private Date fecha_registro;
-    private Date fecha_actualizacion;
+    private Date fecha_modificacion;
     private int p_adulto;
     private int p_nino;
-    private String url;
+    private List<String> urls;
     private int idFUno;
     private int idFDos;
     private int total;
-
+    
     public int getId() {
         return id;
     }
@@ -57,12 +58,12 @@ public class MdlServicios {
         this.fecha_registro = fecha_registro;
     }
 
-    public Date getFecha_actualizacion() {
-        return fecha_actualizacion;
+    public Date getFecha_modificacion() {
+        return fecha_modificacion;
     }
 
-    public void setFecha_actualizacion(Date fecha_actualizacion) {
-        this.fecha_actualizacion = fecha_actualizacion;
+    public void setFecha_modificacion(Date fecha_modificacion) {
+        this.fecha_modificacion = fecha_modificacion;
     }
 
     public int getP_adulto() {
@@ -81,14 +82,15 @@ public class MdlServicios {
         this.p_nino = p_nino;
     }
 
-    public String getUrl() {
-        return url;
+    public List<String> getUrls() {
+        return urls;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setUrls(List<String> urls) {
+        this.urls = urls;
     }
 
+   
     public int getIdFUno() {
         return idFUno;
     }

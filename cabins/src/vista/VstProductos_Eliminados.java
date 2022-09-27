@@ -25,6 +25,7 @@ DefaultTableModel diseñoTablaEliminados=new DefaultTableModel(){public boolean 
     
     public VstProductos_Eliminados() {
         initComponents();
+         bordePantalla();
         CargarTabla();
         getContentPane().setBackground(new Color(255, 255, 255));
     }

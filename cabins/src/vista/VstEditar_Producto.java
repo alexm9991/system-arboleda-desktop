@@ -15,8 +15,8 @@ import java.sql.Timestamp;
 import javax.swing.*;
 
 
-public final class VstEditar_Producto extends javax.swing.JFrame  {
-
+public final class VstEditar_Producto extends vista.VstBase  {
+int x,y;
     JFileChooser seleccionado = new JFileChooser();
     File archivo;
     byte[] byteImg;
@@ -31,6 +31,8 @@ public final class VstEditar_Producto extends javax.swing.JFrame  {
         this.setLocationRelativeTo(null);
        
         initComponents();
+        
+         bordePantalla();
         Ocultar();
         getContentPane().setBackground(new Color(255, 255, 255));
     }
@@ -159,7 +161,6 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(714, 520));
-        setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1105, 550));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -191,6 +192,7 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
         });
         getContentPane().add(lbl_minimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 0, 30, 30));
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jPanel3MouseDragged(evt);
@@ -428,16 +430,16 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
     private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
       
     }//GEN-LAST:event_jPanel1MouseDragged
-int x,y;
+
     private void jPanel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MousePressed
         x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_jPanel3MousePressed
 
     private void jPanel3MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseDragged
-       int X = evt.getXOnScreen();
+        int X = evt.getXOnScreen();
         int Y = evt.getYOnScreen();
-        this.setLocation(X - x, Y - y);
+        this.setLocation(X - x/2, Y-y/2);
     }//GEN-LAST:event_jPanel3MouseDragged
     
     public static void main(String args[]) {

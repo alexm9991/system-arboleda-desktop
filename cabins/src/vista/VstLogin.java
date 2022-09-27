@@ -23,6 +23,7 @@ public class VstLogin extends VstBase {
         super();
         initComponents();
         SetImageLabel(lbl_logo, "src/assets/logo.jpg");
+        bordePantalla();
     }
 
     // hover salir
@@ -218,13 +219,14 @@ public class VstLogin extends VstBase {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_iniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_iniciarActionPerformed
-       CtrEncrypt val = new CtrEncrypt();
+//       Condicional para validar si se llenaron los campos
         if(txt_email.getText().isEmpty() & txt_password.getText().isEmpty()){
             JOptionPane.showMessageDialog(null,"Por favor Llene los campos");
-        }else{          
+        }else{    
         String usuario = txt_email.getText();
            String password = txt_password.getText();
             CtrLogin validar = new CtrLogin();
+//            Se envían los datos al metodo de validacion
         if (validar.Validarusuario(usuario, password)==1){
             this.dispose();
         }

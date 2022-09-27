@@ -25,7 +25,7 @@ import javax.swing.JOptionPane;
  *
  * @author SENA
  */
-public class VstAgregar_Producto extends javax.swing.JFrame {
+public class VstAgregar_Producto extends vista.VstBase {
     JFileChooser seleccionado = new JFileChooser();
     File archivo;
     byte[] byteImg;
@@ -45,6 +45,7 @@ public void Fecha() {
 
     public VstAgregar_Producto() {
         initComponents();
+          bordePantalla();
         this.setLocationRelativeTo(null);
         aviso.setVisible(false);
         aviso2.setVisible(false);
@@ -145,7 +146,6 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(880, 520));
-        setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1105, 550));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

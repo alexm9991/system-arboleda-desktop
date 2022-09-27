@@ -26,6 +26,7 @@ public class VstProductos extends vista.VstBase{
     public VstProductos() {
         this.setLocationRelativeTo(null);
         initComponents();
+        bordePantalla();
         CargarTabla();
         getContentPane().setBackground(new Color(255, 255, 255));
     }
@@ -37,7 +38,7 @@ public void salirExited(java.awt.event.MouseEvent evt){
            lbl_salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/errorBlanco.png")));
         }
 public void cerrarVentana(java.awt.event.MouseEvent evt){
-    System.exit(0);
+        this.dispose();
 }
 public void crearEntered(java.awt.event.MouseEvent evt){
            btn_crear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/crearProductoColor.png")));
@@ -135,11 +136,12 @@ diseñoTabla.setRowCount(0);
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btn_crear = new javax.swing.JButton();
+        lbl_minimizar = new javax.swing.JLabel();
         lbl_salir = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        btn_crear = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tdlDatos = new javax.swing.JTable();
-        lbl_minimizar = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -152,6 +154,48 @@ diseñoTabla.setRowCount(0);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_minimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/circuloBlanco.png"))); // NOI18N
+        lbl_minimizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_minimizarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbl_minimizarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbl_minimizarMouseExited(evt);
+            }
+        });
+        getContentPane().add(lbl_minimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 0, 30, 30));
+
+        lbl_salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/errorBlanco.png"))); // NOI18N
+        lbl_salir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_salirMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbl_salirMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbl_salirMouseExited(evt);
+            }
+        });
+        getContentPane().add(lbl_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 0, 30, 30));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jPanel1MouseDragged(evt);
+            }
+        });
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel1MousePressed(evt);
+            }
+        });
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 20));
 
         btn_crear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/crearProductoBlanco.png"))); // NOI18N
         btn_crear.setToolTipText("Crear");
@@ -171,20 +215,6 @@ diseñoTabla.setRowCount(0);
             }
         });
         getContentPane().add(btn_crear, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 90, 70));
-
-        lbl_salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/errorBlanco.png"))); // NOI18N
-        lbl_salir.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbl_salirMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lbl_salirMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lbl_salirMouseExited(evt);
-            }
-        });
-        getContentPane().add(lbl_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 0, 30, 30));
 
         tdlDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -209,21 +239,7 @@ diseñoTabla.setRowCount(0);
         });
         jScrollPane2.setViewportView(tdlDatos);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 550, 320));
-
-        lbl_minimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/circuloBlanco.png"))); // NOI18N
-        lbl_minimizar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbl_minimizarMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lbl_minimizarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lbl_minimizarMouseExited(evt);
-            }
-        });
-        getContentPane().add(lbl_minimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 0, 30, 30));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 550, 310));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/refresh.png"))); // NOI18N
         jButton2.setToolTipText("Refrescar");
@@ -377,6 +393,19 @@ diseñoTabla.setRowCount(0);
     private void btn_crearMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_crearMouseExited
         crearExited(evt);
     }//GEN-LAST:event_btn_crearMouseExited
+int xx,xy;
+    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+       xx=evt.getX();
+        xy=evt.getY();
+        
+    }//GEN-LAST:event_jPanel1MousePressed
+
+    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
+         int x=evt.getXOnScreen();
+        int y=evt.getYOnScreen();
+
+        this.setLocation(x-xx, y-xy);
+    }//GEN-LAST:event_jPanel1MouseDragged
 
     /**
      * @param args the command line arguments
@@ -393,6 +422,7 @@ diseñoTabla.setRowCount(0);
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbl_minimizar;
     private javax.swing.JLabel lbl_salir;

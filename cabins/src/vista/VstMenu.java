@@ -10,6 +10,7 @@ public class VstMenu extends VstBase {
         super();
         initComponents();
          setLocationRelativeTo(null);
+         bordePantalla();
     }
 
     // hover mouse
@@ -127,6 +128,11 @@ public class VstMenu extends VstBase {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btn_gestionReportesMouseExited(evt);
+            }
+        });
+        btn_gestionReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_gestionReportesActionPerformed(evt);
             }
         });
 
@@ -357,6 +363,11 @@ public class VstMenu extends VstBase {
         VstProductos abrir = new VstProductos();
         abrir.setVisible(true);
     }//GEN-LAST:event_btn_gestionProductosActionPerformed
+
+    private void btn_gestionReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_gestionReportesActionPerformed
+        VstType abrir = new VstType();
+        abrir.setVisible(true);
+    }//GEN-LAST:event_btn_gestionReportesActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

@@ -256,6 +256,11 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
         txt_contrasenia.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         txt_contrasenia.setForeground(new java.awt.Color(51, 51, 51));
         txt_contrasenia.setBorder(null);
+        txt_contrasenia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_contraseniaActionPerformed(evt);
+            }
+        });
         getContentPane().add(txt_contrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 253, 160, 20));
 
         lbl_directorio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -460,6 +465,10 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
     private void txt_identificacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_identificacionMouseClicked
       
     }//GEN-LAST:event_txt_identificacionMouseClicked
+
+    private void txt_contraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_contraseniaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_contraseniaActionPerformed
 
     /**
      * @param args the command line arguments
