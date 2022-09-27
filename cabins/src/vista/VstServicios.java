@@ -12,73 +12,70 @@ import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import modelo.MdlServicios;
+import java.util.List;
 
 public class VstServicios extends VstBase {
 
-    ArrayList<MdlServicios> lista = new ArrayList();
+    ArrayList<MdlServicios> lista;
     ArrayList<MdlServicios> lista_imagen = new ArrayList();
-    DefaultTableModel modelo = new DefaultTableModel();
 
     int cantidad = 0;
 
     //CONSULTA LA BASE DE DATOS
     public void consultar() {
-        CtrServicios ctrServicios = new CtrServicios();
-        lista = ctrServicios.consultar();
         llenarTabla();
     }
 
     //LLENA LA TABLA CON LA INFOMACION IMPORTANTE DEL SERVICIO
     public void llenarTabla() {
+        CtrServicios ctrServicios = new CtrServicios();
+        DefaultTableModel tabla = new DefaultTableModel();
+
+        String[] fila = new String[5];
+        tabla.addColumn("Nombre");
+        tabla.addColumn("Descripción");
+        tabla.addColumn("Estado");
+        tabla.addColumn("Fecha de cración");
+        tabla.addColumn("Fecha de modificación");
+        System.out.println("holis");
+        lista = ctrServicios.consultar();
         for (int consecutivo = 0; consecutivo < lista.size(); consecutivo++) {
-            tbl_tabla.setValueAt(lista.get(consecutivo).getNombre_servicio(), consecutivo, 0);
-            tbl_tabla.setValueAt(lista.get(consecutivo).getDescripcion(), consecutivo, 1);
-            tbl_tabla.setValueAt(lista.get(consecutivo).getEstado(), consecutivo, 2);
-            tbl_tabla.setValueAt(lista.get(consecutivo).getFecha_registro(), consecutivo, 3);
-            tbl_tabla.setValueAt(lista.get(consecutivo).getFecha_actualizacion(), consecutivo, 4);
+            fila[0] = lista.get(consecutivo).getNombre_servicio();
+            fila[1] = lista.get(consecutivo).getDescripcion();
+            fila[2] = lista.get(consecutivo).getEstado();
+            fila[3] = lista.get(consecutivo).getFecha_registro().toString();
+            fila[4] = lista.get(consecutivo).getFecha_modificacion().toString();
+
+            tabla.addRow(fila);
         }
+        tbl_tabla.setModel(tabla);
     }
 
     //ESTE BOTON GUARDA LA IMAGEN SELECCIONADA EN LA TABLA URL
-    Object[] datos = new Object[1];
+    int ban = 0;
+    Object[] datos = new Object[10];
 
     public void guardarImagen() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Url");
+        tbl_imagen.setModel(modelo);
         String ruta = lbl_ruta.getText();
-
-        datos[0] = ruta;
+        System.out.println(ban);
+        datos[ban] = ruta;
         modelo.addRow(datos);
         tbl_imagen.setModel(modelo);
-
+        System.out.println(ban);
+        System.out.println(datos[ban]);
+        ban++;
+        System.out.println(ban);
         ruta = "";
         btn_guardar.setEnabled(false);
         btn_eliminar.setEnabled(false);
         lbl_imagen.setIcon(null);
 
     }
-
     public void guardarImagenDB(MdlServicios servicio) {
         conexionMensaje conectar = new conexionMensaje();
-
-        try {
-
-            if (tbl_imagen.getRowCount() > 0) {
-                System.out.println("si recibe");
-            } else {
-                System.out.println("nel");
-            }
-
-            for (int i = 0; i < modelo.getRowCount(); i++) {
-                String c = "insert into resources(url,detail_services_id)"
-                        + "values('" + tbl_imagen.getValueAt(i, 0) + "'," + servicio.getId() + ")";
-
-                conectar.ejecutar(c);
-
-                System.out.println(c);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "no se ve");
-            System.out.println("no se ve jeje");
-        }
 
     }
 
@@ -96,7 +93,7 @@ public class VstServicios extends VstBase {
     //EVENTO DEL MOUSE QUE AL DARLE CLIC A UNA FILA TE LLAMA EL METODO LLENAR DATOS 
     public void traerDato() {
         MdlServicios mdlServicio = new MdlServicios();
-        for (int posicion = 0; posicion < 6; posicion++) {
+        for (int posicion = 0; posicion < lista.size(); posicion++) {
             if (tbl_tabla.getSelectedRow() == posicion) {
                 mdlServicio = lista.get(posicion);
             }
@@ -104,16 +101,17 @@ public class VstServicios extends VstBase {
         desocultarM();
         ocultarC();
         llenarDatos(mdlServicio);
-        consultar_precios(mdlServicio);
-
     }
 
     //OBTIENE LOS DATOS DE LA TABLA Y LOS MUESTRA EN LOS CAMPOS DE LA INTERFAZ
     public void llenarDatos(MdlServicios servicio) {
-
+        CtrServicios ctrServicios = new CtrServicios();
+        ctrServicios.consultarPrecios(servicio);
+        consultar_imagen(servicio);
         txt_id.setText(String.valueOf(servicio.getId()));
         txt_nombre.setText(servicio.getNombre_servicio());
         txa_descripcion.setText(servicio.getDescripcion());
+
         if (servicio.getEstado().equals("Activo")) {
             cmb_estado.setSelectedIndex(1);
         } else {
@@ -122,38 +120,38 @@ public class VstServicios extends VstBase {
             }
         }
 
-        //consultar_imagen();
-    }
-//nesesita metodo
-
-    public void consultar_precios(MdlServicios servicio) {
-        CtrServicios ctrServicios = new CtrServicios();
-        
-        ctrServicios.consultarPrecios(servicio);
         txt_precioA.setText(String.valueOf(servicio.getP_adulto()));
         txt_precioN.setText(String.valueOf(servicio.getP_nino()));
-        spn_cantidad.setValue(String.valueOf(servicio.getTotal()));
+        spn_cantidad.setValue(servicio.getTotal());
+
     }
 
     //CONSULTAR IMAGENES EN LA DB
-    public void consultar_imagen() {
-        CtrServicios ctrServicio = new CtrServicios();
-        lista_imagen = ctrServicio.consultar();
-        llenarTablaImagen();
+    public void consultar_imagen(MdlServicios servicio) {
+        llenarTablaImagen(servicio);
     }
 
     //LLENAR LA TABLA URL CON LAS IMAGANES QUE HAY EN LA DB
-    public void llenarTablaImagen() {
+    public void llenarTablaImagen(MdlServicios servicio) {
+        CtrServicios ctrServicios = new CtrServicios();
+        DefaultTableModel tablaI = new DefaultTableModel();
+
+        String[] fila = new String[1];
+        tablaI.addColumn("Url");
+        lista_imagen = ctrServicios.consultar_imagen(servicio);
         for (int consecutivo = 0; consecutivo < lista_imagen.size(); consecutivo++) {
-            tbl_imagen.setValueAt(lista_imagen.get(consecutivo).getUrl(), consecutivo, 0);
+            fila[0] = lista_imagen.get(consecutivo).getUrls().get(consecutivo); 
+            System.out.println(lista_imagen);
+            tablaI.addRow(fila);
         }
+        tbl_imagen.setModel(tablaI);
     }
 
     //LIMPIA TODO LO QUE HAY EN LA TABLA URL
     public void limpiarTablaImagenTemporal() {
-
+        DefaultTableModel tablaI = new DefaultTableModel();
         for (int i = 0; i < tbl_imagen.getRowCount(); i++) {
-            modelo.removeRow(i);
+            tbl_imagen.remove(this);
             i -= 1;
         }
     }
@@ -206,10 +204,15 @@ public class VstServicios extends VstBase {
         mdlServicio.setNombre_servicio(txt_nombre.getText());
         mdlServicio.setDescripcion(txa_descripcion.getText());
         mdlServicio.setEstado(cmb_estado.getSelectedItem().toString());
-
+        mdlServicio.setTotal(Integer.parseInt(spn_cantidad.getValue().toString()));
         mdlServicio.setP_adulto(Integer.parseInt(txt_precioA.getText()));
         mdlServicio.setP_nino(Integer.parseInt(txt_precioN.getText()));
-
+        
+        List<String> lUrls = new ArrayList<>();
+        for (int i = 0; i <= tbl_imagen.getRowCount(); i++){
+            lUrls.add(tbl_imagen.getValueAt(0, i).toString()); 
+        }
+        mdlServicio.setUrls(lUrls); 
         // m_servicio.setUrl(tbl_imagen.ruta);
         ctrServicios.guardarServicio(mdlServicio);
         limpiar();
@@ -227,6 +230,7 @@ public class VstServicios extends VstBase {
         mdlServicio.setNombre_servicio(txt_nombre.getText());
         mdlServicio.setDescripcion(txa_descripcion.getText());
         mdlServicio.setEstado(cmb_estado.getSelectedItem().toString());
+        mdlServicio.setTotal(Integer.parseInt(spn_cantidad.getValue().toString()));
         mdlServicio.setP_adulto(Integer.parseInt(txt_precioA.getText()));
         mdlServicio.setP_nino(Integer.parseInt(txt_precioN.getText()));
 
@@ -255,6 +259,7 @@ public class VstServicios extends VstBase {
 
     //MENSAJES EMERGENTES DE CONFIMARCION
     public void confirmarElimiarImagen() {
+        DefaultTableModel modelo = new DefaultTableModel();
         if (lbl == "true") {
             String botones[] = {"Eliminar", "Cancelar"};
             int eleccion = JOptionPane.showOptionDialog(this, "¿Desea eliminar la imagen?", "Titulo",
@@ -278,12 +283,17 @@ public class VstServicios extends VstBase {
     }
 
     private void confirmarCrear() {
-        String botones[] = {"Crear", "Cancelar"};
-        int eleccion = JOptionPane.showOptionDialog(this, "¿Desea crear el servicio?", "Titulo",
-                0, 0, null, botones, this);
-        if (eleccion == JOptionPane.YES_OPTION) {
-            crear();
-        } else if (eleccion == JOptionPane.NO_OPTION) {
+        if (txt_nombre.getText().equals("") || cmb_estado.getSelectedItem().toString().equals("Seleccione...")
+                || txa_descripcion.getText().equals("") || txt_precioA.getText().equals("")
+                || txt_precioN.getText().equals("") || spn_cantidad.getValue().toString().equals("0")) {
+            JOptionPane.showMessageDialog(null, "Por favor complete todos los campos");
+        } else {
+            String botones[] = {"Crear", "Cancelar"};
+            int eleccion = JOptionPane.showOptionDialog(this, "¿Desea crear el servicio?", "Titulo",
+                    0, 0, null, botones, this);
+            if (eleccion == JOptionPane.YES_OPTION) {
+                crear();
+            }
         }
     }
 
@@ -372,8 +382,6 @@ public class VstServicios extends VstBase {
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        modelo.addColumn("Url");
-        tbl_imagen.setModel(modelo);
     }
 
     public VstServicios() {
@@ -528,105 +536,6 @@ public class VstServicios extends VstBase {
         tbl_tabla.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         tbl_tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
                 {null, null, null, null, null}
             },
             new String [] {
@@ -954,8 +863,6 @@ public class VstServicios extends VstBase {
 
     private void lbl_salirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_salirMouseClicked
         cerrarVentana(evt);
-        VstMenu menu = new VstMenu();
-        menu.setVisible(true);
     }//GEN-LAST:event_lbl_salirMouseClicked
 
     private void lbl_minimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_minimizarMouseClicked
