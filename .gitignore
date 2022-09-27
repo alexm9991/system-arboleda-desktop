@@ -24,3 +24,7 @@ hs_err_pid*
 
 #path project
 cabins/build
+
+
+prueba
+/cabins/src/controlador/prueba.java
