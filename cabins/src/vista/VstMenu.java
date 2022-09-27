@@ -1,5 +1,6 @@
 package vista;
 
+import Vista.VstProductos;
 import java.awt.Color;
 import java.awt.Component;
 import vista.VstGestionUsuarios;
@@ -89,6 +90,11 @@ public class VstMenu extends VstBase {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btn_gestionProductosMouseExited(evt);
+            }
+        });
+        btn_gestionProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_gestionProductosActionPerformed(evt);
             }
         });
 
@@ -346,6 +352,11 @@ public class VstMenu extends VstBase {
         VstServicios abrir = new VstServicios();
         abrir.setVisible(true);
     }//GEN-LAST:event_btn_gestionServiciosActionPerformed
+
+    private void btn_gestionProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_gestionProductosActionPerformed
+        VstProductos abrir = new VstProductos();
+        abrir.setVisible(true);
+    }//GEN-LAST:event_btn_gestionProductosActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
