@@ -22,7 +22,7 @@ public class VstBase extends javax.swing.JFrame {
         setVisible(true);
         ImageIcon icono = new ImageIcon("src/assets/logo.jpg");
         this.setIconImage(icono.getImage());
-        bordePantalla();
+       
     }
 
     public void bordePantalla() {
