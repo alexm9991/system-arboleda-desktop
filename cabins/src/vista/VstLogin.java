@@ -1,5 +1,7 @@
 package vista;
 
+import controlador.CtrEncrip;
+import controlador.CtrLogin;
 import conexion.conexionMensaje;
 import java.awt.Image;
 import java.sql.Connection;
@@ -9,6 +11,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import controlador.CtrEncrip;
 
 /**
  * @author jorge
@@ -52,30 +55,7 @@ public class VstLogin extends VstBase {
 
     }
 
-    public void Validarusuario() {
-        int resultado = 0;
-        String password = String.valueOf(txt_password.getPassword());
-        String usuario = txt_email.getText();
-        String SQL = "select email,password from users where email='" + usuario + "' and password='"
-                + password + "' and state_record = 'ACTIVAR'";
-
-        try {
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(SQL);
-            if (rs.next()) {
-                resultado = 1;
-                if (resultado == 1) {
-                    VstMenu menuPrincipal = new VstMenu();
-                    menuPrincipal.setVisible(true);
-                    this.dispose();
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Error de Acceso: Usuario no registrado");
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
-        }
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -123,6 +103,11 @@ public class VstLogin extends VstBase {
         lbl_password.setText("Password:");
 
         txt_password.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        txt_password.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_passwordActionPerformed(evt);
+            }
+        });
 
         btn_iniciar.setText("Login");
         btn_iniciar.addActionListener(new java.awt.event.ActionListener() {
@@ -236,7 +221,20 @@ public class VstLogin extends VstBase {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_iniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_iniciarActionPerformed
-        Validarusuario();
+       CtrEncrip val = new CtrEncrip();
+        if(txt_email.getText().isEmpty() & txt_password.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Por favor Llene los campos");
+        }else{          
+        String usuario = txt_email.getText();
+           String password = txt_password.getText();
+            CtrLogin validar = new CtrLogin();
+        if (validar.Validarusuario(usuario, password)==1){
+            this.dispose();
+        }
+        
+        
+        }
+        
     }//GEN-LAST:event_btn_iniciarActionPerformed
 
     private void lbl_salirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_salirMouseClicked
@@ -270,6 +268,10 @@ public class VstLogin extends VstBase {
     private void pnl_loginPrincipalMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_loginPrincipalMouseDragged
         super.moverVentana(evt);
     }//GEN-LAST:event_pnl_loginPrincipalMouseDragged
+
+    private void txt_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_passwordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_passwordActionPerformed
 
     /**
      * @param args the command line arguments
