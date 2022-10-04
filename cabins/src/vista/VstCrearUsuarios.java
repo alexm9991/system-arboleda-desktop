@@ -7,6 +7,7 @@ import java.awt.geom.RoundRectangle2D;
 import java.sql.*;
 import javax.swing.*;
 import conexion.*;
+import java.awt.event.KeyEvent;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -158,6 +159,11 @@ public class VstCrearUsuarios extends javax.swing.JFrame {
         txt_apellido.setForeground(new java.awt.Color(51, 51, 51));
         txt_apellido.setBorder(null);
         txt_apellido.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txt_apellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_apellidoKeyTyped(evt);
+            }
+        });
         getContentPane().add(txt_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 170, 20));
 
         txt_contacto.setBackground(new java.awt.Color(255, 255, 255));
@@ -165,6 +171,11 @@ public class VstCrearUsuarios extends javax.swing.JFrame {
         txt_contacto.setForeground(new java.awt.Color(51, 51, 51));
         txt_contacto.setBorder(null);
         txt_contacto.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txt_contacto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_contactoKeyTyped(evt);
+            }
+        });
         getContentPane().add(txt_contacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 250, 170, 20));
 
         txt_identificacion.setBackground(new java.awt.Color(255, 255, 255));
@@ -172,6 +183,11 @@ public class VstCrearUsuarios extends javax.swing.JFrame {
         txt_identificacion.setForeground(new java.awt.Color(51, 51, 51));
         txt_identificacion.setBorder(null);
         txt_identificacion.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txt_identificacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_identificacionKeyTyped(evt);
+            }
+        });
         getContentPane().add(txt_identificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 390, 170, 20));
 
         txt_correo.setBackground(new java.awt.Color(255, 255, 255));
@@ -199,12 +215,16 @@ public class VstCrearUsuarios extends javax.swing.JFrame {
                 txt_edadActionPerformed(evt);
             }
         });
+        txt_edad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_edadKeyTyped(evt);
+            }
+        });
         getContentPane().add(txt_edad, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, 170, 20));
 
         txt_contrasenia.setBackground(new java.awt.Color(255, 255, 255));
         txt_contrasenia.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         txt_contrasenia.setForeground(new java.awt.Color(51, 51, 51));
-        txt_contrasenia.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_contrasenia.setBorder(null);
         getContentPane().add(txt_contrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 253, 160, 20));
 
@@ -281,6 +301,11 @@ public class VstCrearUsuarios extends javax.swing.JFrame {
                 txt_nombreActionPerformed(evt);
             }
         });
+        txt_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_nombreKeyTyped(evt);
+            }
+        });
         getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, 170, 20));
 
         jLabel14.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
@@ -347,6 +372,43 @@ public class VstCrearUsuarios extends javax.swing.JFrame {
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
        setExtendedState(ICONIFIED);
     }//GEN-LAST:event_jLabel11MouseClicked
+
+    private void txt_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nombreKeyTyped
+        soloLetras(evt);
+        
+        if(txt_nombre.getText().length() >= 20){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_nombreKeyTyped
+
+    private void txt_apellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_apellidoKeyTyped
+        soloLetras(evt);
+        if(txt_apellido.getText().length() >= 20){
+            evt.consume();
+        }
+        
+    }//GEN-LAST:event_txt_apellidoKeyTyped
+
+    private void txt_contactoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_contactoKeyTyped
+        soloNumeros(evt);
+        if(txt_contacto.getText().length() >= 10){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_contactoKeyTyped
+
+    private void txt_edadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_edadKeyTyped
+        soloNumeros(evt);
+        if(txt_edad.getText().length() >= 2){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_edadKeyTyped
+
+    private void txt_identificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_identificacionKeyTyped
+        soloNumeros(evt);
+        if(txt_identificacion.getText().length() >= 12){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_identificacionKeyTyped
 
     /**
      * @param args the command line arguments
@@ -499,6 +561,7 @@ public class VstCrearUsuarios extends javax.swing.JFrame {
 //        } catch (SQLException e) {
 //            System.err.println("Error en guardar usuario " +e);
 //        }
+
         try {
 
             Connection cn1 = conexionMensaje.nuevaConexion();
@@ -554,6 +617,27 @@ public class VstCrearUsuarios extends javax.swing.JFrame {
             System.err.println("ERROR en validar usuario " + e);
             JOptionPane.showMessageDialog(null, "ERROR al comparar usuario! Contacte al Administrador, -Problemas de Conexion-");
 
+        }
+    }
+    
+    //Metodo validacion de ingreso de datos
+    //Solo caracteres
+    public void soloLetras(java.awt.event.KeyEvent evt){
+        
+        Character c = evt.getKeyChar();
+        
+        if(!Character.isLetter(c) && c != KeyEvent.VK_SPACE){
+            evt.consume();
+        }
+    }
+    
+    //solo numeros
+    public void soloNumeros(java.awt.event.KeyEvent evt){
+        
+        Character c = evt.getKeyChar();
+        
+        if(!Character.isDigit(c)){
+            evt.consume();
         }
     }
 }

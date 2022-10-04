@@ -19,14 +19,11 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
 
     public static String user_update = "";
 
-    DefaultTableModel model = new DefaultTableModel();
+    DefaultTableModel model = new DefaultTableModel(); //Vraiable importante para la creacion de un JTable
 
-    /**
-     * Creates new form Gestion_Usuarios
-     */
     public VstGestionUsuarios() {
 
-        this.setUndecorated(true);
+        this.setUndecorated(true); //Es para quitarle los estilos al JFrame y darle nuestros propios estilos
 
         initComponents();
 
@@ -34,23 +31,25 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
         Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 40, 40);
         AWTUtilities.setWindowShape(this, forma);
 
-        setResizable(false);
-        setLocationRelativeTo(null);
-        setTitle("Gestion de Usuarios - Sesion de ");
+        setResizable(false);//sirve para expandir el jframe
+        setLocationRelativeTo(null);//sirve para que el jframe aparzca por defecto en el centro de la pantalla
+        
 
         getContentPane().setBackground(new Color(255, 255, 255));//Color Fondo del Jframe
 
+        
+        //Funcionalidad para el ingreso de datos a la tabla
         try {
             Connection cn = conexionMensaje.getConnection();
             PreparedStatement pst = cn.prepareStatement(
                     "select name, identification_number, phone_number from users where state_record = 'ACTIVO' ");
 
-            ResultSet rs = pst.executeQuery();
+            ResultSet rs = pst.executeQuery();//SOLO CONSULTAR
 
             tbl_tablaUsuarios = new JTable(model);
             jScrollPane1.setViewportView(tbl_tablaUsuarios);
 
-            jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
+            jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());//mETODO PARA DARLE ESTILO AL JSCROLLOPANE
 
             tbl_tablaUsuarios.getTableHeader().setDefaultRenderer(new HeaderColor());
 
@@ -75,12 +74,13 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
                 }
                 model.addRow(fila); //De esta forma estariamos agregando la fila que hayamos encontrado dentro del objeto model
             }
-            cn.close();
+            cn.close();//importante cerrar conexion
         } catch (SQLException e) {
             System.err.println("ERROR al llenar tabla." + e);
             JOptionPane.showMessageDialog(null, "ERROR al mostrar informacion, Contacte al Administrador!");
         }
 
+        //METODO PARA AGREGARLE EVENTO AL DARLE CLICK A UN CAMPO DEL JTABLE
         tbl_tablaUsuarios.addMouseListener(new MouseAdapter() {
 
             @Override //Vamos a sobreescribir un metodo de una clase existente, asi que escribimos el Override
@@ -94,6 +94,8 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
 
                     user_update = (String) model.getValueAt(fila_point, columna_point); //Pasamos estos valores a la variable statica que creamos antes
 
+                    
+                    
                     new VstInformacionUsuarios().setVisible(true); //con esta linea abrimos la interfaz de la informacion del usuario seleccionado
 
                 }
@@ -484,5 +486,7 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
     public void refrescarTabla() {
         model.setRowCount(0);
     }
+    
+    
 
 }

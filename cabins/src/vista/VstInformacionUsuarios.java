@@ -8,7 +8,7 @@ import java.sql.*;
 import conexion.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import static vista.VstCrearUsuarios.formatter;
+import vista.VstCrearUsuarios;
 
 public class VstInformacionUsuarios extends javax.swing.JFrame {
 
@@ -36,6 +36,8 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setBackground(new Color(255, 255, 255));
 
+        
+        //METODO PARA TRAER TODOS LOS DATOS DE UNA PERSONA
         try {
 
             Connection cn = conexionMensaje.nuevaConexion();
@@ -200,6 +202,11 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
                 txt_apellidoMouseClicked(evt);
             }
         });
+        txt_apellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_apellidoKeyTyped(evt);
+            }
+        });
         getContentPane().add(txt_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 170, 20));
 
         txt_contacto.setBackground(new java.awt.Color(255, 255, 255));
@@ -207,6 +214,11 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
         txt_contacto.setForeground(new java.awt.Color(51, 51, 51));
         txt_contacto.setBorder(null);
         txt_contacto.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txt_contacto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_contactoKeyTyped(evt);
+            }
+        });
         getContentPane().add(txt_contacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 250, 170, 20));
 
         txt_identificacion.setBackground(new java.awt.Color(255, 255, 255));
@@ -217,6 +229,11 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
         txt_identificacion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txt_identificacionMouseClicked(evt);
+            }
+        });
+        txt_identificacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_identificacionKeyTyped(evt);
             }
         });
         getContentPane().add(txt_identificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 390, 170, 20));
@@ -251,12 +268,18 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
                 txt_edadActionPerformed(evt);
             }
         });
+        txt_edad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_edadKeyTyped(evt);
+            }
+        });
         getContentPane().add(txt_edad, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, 170, 20));
 
         txt_contrasenia.setBackground(new java.awt.Color(255, 255, 255));
         txt_contrasenia.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         txt_contrasenia.setForeground(new java.awt.Color(51, 51, 51));
         txt_contrasenia.setBorder(null);
+        txt_contrasenia.setEnabled(false);
         getContentPane().add(txt_contrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 253, 160, 20));
 
         lbl_directorio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -317,6 +340,11 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
         txt_nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_nombreActionPerformed(evt);
+            }
+        });
+        txt_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_nombreKeyTyped(evt);
             }
         });
         getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, 170, 20));
@@ -462,6 +490,46 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
       
     }//GEN-LAST:event_txt_identificacionMouseClicked
 
+    private void txt_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nombreKeyTyped
+         new VstCrearUsuarios().soloLetras(evt);
+         
+         if(txt_nombre.getText().length() >= 20){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_nombreKeyTyped
+
+    private void txt_apellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_apellidoKeyTyped
+        new VstCrearUsuarios().soloLetras(evt);
+        
+        if(txt_apellido.getText().length() >= 20){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_apellidoKeyTyped
+
+    private void txt_contactoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_contactoKeyTyped
+       new VstCrearUsuarios().soloNumeros(evt);
+       
+       if(txt_contacto.getText().length() >= 10){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_contactoKeyTyped
+
+    private void txt_edadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_edadKeyTyped
+        new VstCrearUsuarios().soloNumeros(evt);
+        
+        if(txt_edad.getText().length() >= 2){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_edadKeyTyped
+
+    private void txt_identificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_identificacionKeyTyped
+        new VstCrearUsuarios().soloNumeros(evt);
+        
+         if(txt_identificacion.getText().length() >= 12){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_identificacionKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -604,6 +672,8 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
             tipo_identificacion_string = "C.E";
         }
 
+        
+        //VALIDACION SI UN USUARIO YA EXISTE
         try {
 
             Connection cn1 = conexionMensaje.nuevaConexion();
@@ -623,12 +693,14 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
 
                 if (validacion == 0) { //Si no hay ningun campo vacio, entonces se realiza la insercion
 
+                    
+                    //metodo para actualizar
                     try {
 
                         Connection cn2 = conexionMensaje.nuevaConexion();
                         PreparedStatement pst2 = cn2.prepareStatement(
                                 "update users set name = ?, last_name = ?, phone_number = ?, identification_type = ?, identification_number = ?, email = ?,  "
-                                + "password = ?, age = ?, state_record = ?, update_time = ? where id = '" + ID + "'");
+                                + " age = ?, state_record = ?, update_time = ? where id = '" + ID + "'");
 
                         pst2.setString(1, nombre);
                         pst2.setString(2, apellido);
@@ -636,10 +708,10 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
                         pst2.setString(4, tipo_identificacion_string);
                         pst2.setString(5, num_identificacion);
                         pst2.setString(6, correo);
-                        pst2.setString(7, contrasenia);
-                        pst2.setString(8, edad);
-                        pst2.setString(9, "ACTIVO");
-                        pst2.setString(10, formattedDateTime);
+                       // pst2.setString(7, contrasenia);
+                        pst2.setString(7, edad);
+                        pst2.setString(8, "ACTIVO");
+                        pst2.setString(9, formattedDateTime);
 
                         pst2.executeUpdate(); //Cuando queremos actualizar datos usamos este metodo ExecuteUpdate pero cuando queremos ejecutar una consulta usamos el metodo ExecuteQuery
                         cn2.close(); //IMPORTANTE CERRAR LA CONEXION
