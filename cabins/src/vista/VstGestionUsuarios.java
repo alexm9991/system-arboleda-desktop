@@ -18,6 +18,9 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
     int x, y;
 
     public static String user_update = "";
+    public static boolean ventanaOpen;
+    
+      
 
     DefaultTableModel model = new DefaultTableModel();
 
@@ -25,6 +28,7 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
      * Creates new form Gestion_Usuarios
      */
     public VstGestionUsuarios() {
+  
         Connection cn = conexionMensaje.getConnection();
         this.setUndecorated(true);
 
@@ -36,10 +40,10 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
 
         setResizable(false);
         setLocationRelativeTo(null);
-        setTitle("Gestion de Usuarios - Sesion de ");
 
         getContentPane().setBackground(new Color(255, 255, 255));//Color Fondo del Jframe
 
+       
         try {
             
             PreparedStatement pst = cn.prepareStatement(
@@ -56,7 +60,7 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
 
             tbl_tablaUsuarios.getTableHeader().setFont(new Font("Verdana", Font.BOLD, 12));
             tbl_tablaUsuarios.getTableHeader().setOpaque(false);
-            tbl_tablaUsuarios.getTableHeader().setBackground(new Color(32, 136, 203));
+            tbl_tablaUsuarios.getTableHeader().setBackground(new Color(255,230,199));
             tbl_tablaUsuarios.getTableHeader().setForeground(new Color(255, 255, 255));
             tbl_tablaUsuarios.setRowHeight(25);
 
@@ -80,11 +84,20 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
             System.err.println("ERROR al llenar tabla." + e);
             JOptionPane.showMessageDialog(null, "ERROR al mostrar informacion, Contacte al Administrador!");
         }
+
+        ventanaOpen = true;
+                
+                VstInformacionUsuarios detallesUsuarios = new VstInformacionUsuarios();
+                if (detallesUsuarios.isVisible()) {
+                    ventanaOpen = false;
+                }
         tbl_tablaUsuarios.addMouseListener(new MouseAdapter() {
             
             @Override //Vamos a sobreescribir un metodo de una clase existente, asi que escribimos el Override
             public void mouseClicked(MouseEvent e) { //Metodo Sobreescrito, con una variable u objeto del tipo MouseEvent en el cual va a guardar de manera temporal el evento asignado
 
+                
+                
                 int fila_point = tbl_tablaUsuarios.rowAtPoint(e.getPoint());//Creamos una variable entera donde va a guardar la posicion a la hora en la que lo seleccionemos con nuestro click
                 int columna_point = 0; //Creamos la variable para la guardar la posicion de la columna, en este caso siempre va ser la posicion 2
 
@@ -93,13 +106,12 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
 
                     user_update = (String) model.getValueAt(fila_point, columna_point); //Pasamos estos valores a la variable statica que creamos antes
 
-                    new VstInformacionUsuarios().setVisible(true); //con esta linea abrimos la interfaz de la informacion del usuario seleccionado
-
+                    if (ventanaOpen != false) {                                                
+                      new VstInformacionUsuarios().setVisible(true); //con esta linea abrimos la interfaz de la informacion del usuario seleccionado      
+                     }                
                 }
-
             }
-        });
-        
+        });      
     }
 
     @SuppressWarnings("unchecked")
@@ -119,6 +131,8 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
         lbl_fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(719, 778));
+        setSize(new java.awt.Dimension(1000, 800));
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 formMouseDragged(evt);
@@ -137,7 +151,7 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("GESTION DE USUARIOS");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
 
         lbl_lupa.setBackground(new java.awt.Color(255, 255, 255));
         lbl_lupa.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -205,6 +219,26 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
                 {null, null, null},
                 {null, null, null},
                 {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
                 {null, null, null}
             },
             new String [] {
@@ -214,12 +248,12 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
         tbl_tablaUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tbl_tablaUsuarios.setFocusable(false);
         tbl_tablaUsuarios.setRowHeight(15);
-        tbl_tablaUsuarios.setSelectionBackground(new java.awt.Color(162, 222, 244));
-        tbl_tablaUsuarios.setShowVerticalLines(false);
+        tbl_tablaUsuarios.setSelectionBackground(new java.awt.Color(255, 230, 199));
+        tbl_tablaUsuarios.setSelectionForeground(new java.awt.Color(255, 230, 199));
         tbl_tablaUsuarios.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tbl_tablaUsuarios);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 530, 310));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 720, 590));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
@@ -239,7 +273,7 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
                 lbl_crearMouseExited(evt);
             }
         });
-        getContentPane().add(lbl_crear, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, 70, 70));
+        getContentPane().add(lbl_crear, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 80, 70, 70));
 
         lbl_cerrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_cerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/errorBlanco.png"))); // NOI18N
@@ -255,7 +289,7 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
                 lbl_cerrarMouseExited(evt);
             }
         });
-        getContentPane().add(lbl_cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, 20, 20));
+        getContentPane().add(lbl_cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 20, 20, 20));
 
         lbl_minimizar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_minimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/circuloBlanco.png"))); // NOI18N
@@ -271,7 +305,7 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
                 lbl_minimizarMouseExited(evt);
             }
         });
-        getContentPane().add(lbl_minimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, 20, 20));
+        getContentPane().add(lbl_minimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, 20, 20));
 
         lbl_refrescar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_refrescar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/refresh.png"))); // NOI18N
@@ -329,7 +363,8 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl_crearMouseClicked
 
     private void lbl_cerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_cerrarMouseClicked
-        this.dispose();
+        setVisible(false);
+       // System.exit(0);
     }//GEN-LAST:event_lbl_cerrarMouseClicked
 
     private void lbl_cerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_cerrarMouseEntered
@@ -345,8 +380,9 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl_minimizarMouseEntered
 
     private void lbl_lupaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_lupaMouseClicked
-
-
+         refrescarTabla();
+         String buscar = txtBuscar.getText().trim();
+         filtrarBusquedad(buscar);
     }//GEN-LAST:event_lbl_lupaMouseClicked
 
     private void lbl_minimizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_minimizarMouseExited
@@ -444,7 +480,7 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
         public Component getTableCellRendererComponent(JTable table, Object value, boolean selected, boolean focused, int row, int column) {
             super.getTableCellRendererComponent(table, value, selected, focused, row, column);
 
-            setBackground(new java.awt.Color(32, 136, 203));
+            setBackground(new java.awt.Color(255, 165, 89));
             setFont(new Font("Verdana", Font.CENTER_BASELINE, 12));
             setHorizontalAlignment(SwingConstants.CENTER);
             setSize(100, 100);
@@ -477,6 +513,31 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.err.println("ERROR al llenar tabla." + e);
             JOptionPane.showMessageDialog(null, "ERROR al mostrar informacion, Contacte al Administrador!");
+        }
+    }
+    
+    public void filtrarBusquedad(String filtro){
+        try {
+            Connection cn = conexionMensaje.nuevaConexion();
+            PreparedStatement pst = cn.prepareStatement(
+                    "select name, identification_number, phone_number from users where name = '"+filtro+"'");
+
+            ResultSet rs = pst.executeQuery();
+
+            //Ahora necesitamos de un ciclo repetitivo para que recorra todos los datos que se obtenga de la base de datos
+            while (rs.next()) { //con esta condicion estamos diciendo que mientras encuentre informacion en la BD se siga ciclando hasta que no haya nada
+                Object[] fila = new Object[3]; //Con este vector le indicamos el tamaño de columnas que hay 
+
+                for (int i = 0; i < 3; i++) { //Con esto le indicamos que i empieza desde cero hasta que llegue a 5 porque son 5 columnas y asi se va recorriendo los datos en la posicion indicada
+                    fila[i] = rs.getObject(i + 1); //Aqui la fila empieza recorrer en su posicion correspondiente
+
+                }
+                model.addRow(fila); //De esta forma estariamos agregando la fila que hayamos encontrado dentro del objeto model
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.err.println("ERROR al llenar tabla." + e);
+            JOptionPane.showMessageDialog(null, "No hay información, Contacte al Administrador!");
         }
     }
 

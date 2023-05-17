@@ -365,7 +365,7 @@ public class VstMenu extends VstBase {
     }//GEN-LAST:event_btn_gestionProductosActionPerformed
 
     private void btn_gestionReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_gestionReportesActionPerformed
-        VstType abrir = new VstType();
+        VstReports abrir = new VstReports();
         abrir.setVisible(true);
     }//GEN-LAST:event_btn_gestionReportesActionPerformed
 

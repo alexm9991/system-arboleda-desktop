@@ -19,7 +19,7 @@ public class CtrlProductos {
         conexionMensaje conecta = new conexionMensaje();
         ArrayList<MdlProductos> listaProductos = new ArrayList();
         ResultSet rs;
-        String sql = "select * from products where state_record='activar'";
+        String sql = "select * from products where state_record='ACTIVAR'";
         System.out.println("Consulta de Productos : " + sql);
         try {
             rs = conecta.consultar(sql);
@@ -47,7 +47,7 @@ public class CtrlProductos {
         conexionMensaje conecta = new conexionMensaje();
         ArrayList<MdlProductos> listaProductosEliminado = new ArrayList();
         ResultSet rs;
-        String sql = "select * from products where state_record='desactivar'";
+        String sql = "select * from products where state_record='DESACTIVAR'";
         System.out.println("Consulta de Productos : " + sql);
         try {
             rs = conecta.consultar(sql);
@@ -89,7 +89,7 @@ public class CtrlProductos {
       
       public void eliminar(MdlProductos producto, int idRetornado){
         conexionMensaje conexion = new conexionMensaje();
-        String sql = "update products set state_record = 'desactivar' where id="+idRetornado;
+        String sql = "update products set state_record = 'DESACTIVAR' where id="+idRetornado;
         System.out.println("Consulta de Productos : " + sql);
         try {
             if(conexion.ejecutar(sql)){
@@ -105,7 +105,7 @@ public class CtrlProductos {
        
       public void restaurar(MdlProductos producto, int idRetornado){
         conexionMensaje conexion = new conexionMensaje();
-        String sql = "update products set state_record = 'activar' where id="+idRetornado;
+        String sql = "update products set state_record = 'ACTIVAR' where id="+idRetornado;
         System.out.println("Consulta de Productos : " + sql);
         try {
             if(conexion.ejecutar(sql)){
@@ -151,7 +151,7 @@ public class CtrlProductos {
         conexionMensaje conexion = new conexionMensaje();
         ArrayList<MdlProductos> listaProductos = new ArrayList();
         ResultSet rs;
-        String sql = "select * from products where state_record='activar'";
+        String sql = "select * from products where state_record='ACTIVAR'";
         System.out.println("Consulta de Productos : " + sql);
         try {
             rs = conexion.consultar(sql);

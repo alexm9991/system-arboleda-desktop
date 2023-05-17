@@ -9,14 +9,21 @@ import conexion.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import controlador.CtrEncrypt;
+import static vista.VstCrearUsuarios.validarTexto;
 public class VstInformacionUsuarios extends javax.swing.JFrame {
 
     //Formato para el TIMESTAMP
     static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    
+     int x, y;
+
 
     String user_update = "";
+    public static String user_updateC = "";
     int ID;
-
+    boolean ventanaOpen;
+    public static boolean ventanaCerrada;
+    
     public VstInformacionUsuarios() {
         this.setUndecorated(true);
 
@@ -29,6 +36,9 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
         AWTUtilities.setWindowShape(this, forma);
 
         user_update = VstGestionUsuarios.user_update;
+        user_updateC = user_update;
+        
+        ventanaOpen = VstGestionUsuarios.ventanaOpen;
 
         setLocationRelativeTo(null);
         setResizable(false);
@@ -79,12 +89,12 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
-        jSeparator3 = new javax.swing.JSeparator();
-        jSeparator4 = new javax.swing.JSeparator();
-        jSeparator6 = new javax.swing.JSeparator();
-        jSeparator7 = new javax.swing.JSeparator();
+        jSeparatorApellido = new javax.swing.JSeparator();
+        jSeparatorContacto = new javax.swing.JSeparator();
+        jSeparatorEdad = new javax.swing.JSeparator();
+        jSeparatorIdentificacion = new javax.swing.JSeparator();
+        jSeparatorCorreo = new javax.swing.JSeparator();
+        jSeparatorContrasenia = new javax.swing.JSeparator();
         txt_apellido = new javax.swing.JTextField();
         txt_contacto = new javax.swing.JTextField();
         txt_identificacion = new javax.swing.JTextField();
@@ -96,7 +106,7 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         lbl_minimizar = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jSeparator9 = new javax.swing.JSeparator();
+        jSeparatorNombre = new javax.swing.JSeparator();
         txt_nombre = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         lbl_modificar = new javax.swing.JLabel();
@@ -105,14 +115,25 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         lbl_correo = new javax.swing.JLabel();
         lbl_clave = new javax.swing.JLabel();
+        btn_cambiarContrasenia = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 900, 550));
         setIconImage(getIconImage());
         setSize(900,550);
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                formMouseDragged(evt);
+            }
+        });
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(102, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 165, 89));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -159,35 +180,35 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
         jLabel10.setText("Edad:");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 300, -1, 20));
 
-        jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, 190, 10));
+        jSeparatorApellido.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparatorApellido.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparatorApellido.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        getContentPane().add(jSeparatorApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, 190, 10));
 
-        jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator2.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, 190, 10));
+        jSeparatorContacto.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparatorContacto.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparatorContacto.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        getContentPane().add(jSeparatorContacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, 190, 10));
 
-        jSeparator3.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator3.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 340, 190, 10));
+        jSeparatorEdad.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparatorEdad.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparatorEdad.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        getContentPane().add(jSeparatorEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 340, 190, 10));
 
-        jSeparator4.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator4.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        getContentPane().add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 410, 190, 10));
+        jSeparatorIdentificacion.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparatorIdentificacion.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparatorIdentificacion.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        getContentPane().add(jSeparatorIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 410, 190, 10));
 
-        jSeparator6.setBackground(new java.awt.Color(51, 255, 255));
-        jSeparator6.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator6.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        getContentPane().add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 200, 190, 10));
+        jSeparatorCorreo.setBackground(new java.awt.Color(51, 255, 255));
+        jSeparatorCorreo.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparatorCorreo.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        getContentPane().add(jSeparatorCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 200, 190, 10));
 
-        jSeparator7.setBackground(new java.awt.Color(51, 255, 255));
-        jSeparator7.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator7.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        getContentPane().add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 273, 190, 10));
+        jSeparatorContrasenia.setBackground(new java.awt.Color(51, 255, 255));
+        jSeparatorContrasenia.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparatorContrasenia.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        getContentPane().add(jSeparatorContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 273, 190, 10));
 
         txt_apellido.setBackground(new java.awt.Color(255, 255, 255));
         txt_apellido.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
@@ -227,7 +248,7 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
         txt_correo.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         getContentPane().add(txt_correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 180, 160, 20));
 
-        cmb_tipoIdentificacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "T.I", "C.C", "C.E" }));
+        cmb_tipoIdentificacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "tarjeta de identidad", "cedula de ciudadania", "cedula de extranjeria" }));
         cmb_tipoIdentificacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmb_tipoIdentificacionActionPerformed(evt);
@@ -256,6 +277,7 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
         txt_contrasenia.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         txt_contrasenia.setForeground(new java.awt.Color(51, 51, 51));
         txt_contrasenia.setBorder(null);
+        txt_contrasenia.setEnabled(false);
         txt_contrasenia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_contraseniaActionPerformed(evt);
@@ -303,10 +325,10 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
         });
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 20, -1, 30));
 
-        jSeparator9.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator9.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator9.setFont(new java.awt.Font("Dubai Medium", 1, 48)); // NOI18N
-        getContentPane().add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 190, 10));
+        jSeparatorNombre.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparatorNombre.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparatorNombre.setFont(new java.awt.Font("Dubai Medium", 1, 48)); // NOI18N
+        getContentPane().add(jSeparatorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 190, 10));
 
         txt_nombre.setBackground(new java.awt.Color(255, 255, 255));
         txt_nombre.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
@@ -343,7 +365,7 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
                 lbl_modificarMouseExited(evt);
             }
         });
-        getContentPane().add(lbl_modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 320, 80, 80));
+        getContentPane().add(lbl_modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 370, 80, 80));
 
         lbl_eliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/eliminar64.png"))); // NOI18N
@@ -359,16 +381,16 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
                 lbl_eliminarMouseExited(evt);
             }
         });
-        getContentPane().add(lbl_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 320, 90, 80));
+        getContentPane().add(lbl_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 370, 90, 80));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Editar");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 400, 50, 20));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 450, 50, 20));
 
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jLabel11.setText("Eliminar");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 400, -1, 20));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 450, -1, 20));
 
         lbl_correo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_correo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/correo.png"))); // NOI18N
@@ -377,6 +399,14 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
         lbl_clave.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_clave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/clave.png"))); // NOI18N
         getContentPane().add(lbl_clave, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 230, 30, 60));
+
+        btn_cambiarContrasenia.setText("CAMBIAR CONTRASEÑA");
+        btn_cambiarContrasenia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_cambiarContraseniaMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btn_cambiarContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 305, 190, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -387,6 +417,7 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
 
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
         //System.exit(0);
+        ventanaCerrada = false;
         setVisible(false);
     }//GEN-LAST:event_jLabel12MouseClicked
 
@@ -470,6 +501,21 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_contraseniaActionPerformed
 
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+        int X = evt.getXOnScreen();
+        int Y = evt.getYOnScreen();
+        this.setLocation(X - x, Y - y);
+    }//GEN-LAST:event_formMouseDragged
+
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+         x = evt.getX();
+         y = evt.getY();
+    }//GEN-LAST:event_formMousePressed
+
+    private void btn_cambiarContraseniaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cambiarContraseniaMouseClicked
+        new VstCambiarContrasenia().setVisible(true);
+    }//GEN-LAST:event_btn_cambiarContraseniaMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -513,6 +559,7 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_cambiarContrasenia;
     private javax.swing.JComboBox<String> cmb_tipoIdentificacion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -528,13 +575,13 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JSeparator jSeparatorApellido;
+    private javax.swing.JSeparator jSeparatorContacto;
+    private javax.swing.JSeparator jSeparatorContrasenia;
+    private javax.swing.JSeparator jSeparatorCorreo;
+    private javax.swing.JSeparator jSeparatorEdad;
+    private javax.swing.JSeparator jSeparatorIdentificacion;
+    private javax.swing.JSeparator jSeparatorNombre;
     private javax.swing.JLabel lbl_clave;
     private javax.swing.JLabel lbl_correo;
     private javax.swing.JLabel lbl_directorio;
@@ -568,34 +615,92 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
         contrasenia = encrypt.encryptPassword(txt_contrasenia.getText().trim());
         edad = txt_edad.getText().trim();
 
-        //VALIDACION DE CAMPOS VACIOS =
-        if (nombre.equals("")) {
-            txt_nombre.setForeground(Color.red);
-            validacion++; //Aqui usamos la variable de tipo bandera en donde indicaremos que si esto pasa, esta misma va aumentar de uno en uno, esto nos ayudara mas adelante para saber cauntos campos estan vacios
+        //VALIDACIONES GENERALES
+       //campos vacios
+       if (nombre.isEmpty() || apellido.isEmpty() || num_telefono.isEmpty() || tipo_identificacion == 0 || num_identificacion.isEmpty() || correo.isEmpty() || contrasenia.isEmpty() || edad.isEmpty()) {
+           JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos son obligatorios");
+           validacion++;
+           return;
         }
-        if (apellido.equals("")) {
-            txt_apellido.setForeground(Color.red);
+       
+       //formato correo correcto
+       else if (!correo.matches("\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b")) {
+            jSeparatorCorreo.setOpaque(true);
+            jSeparatorCorreo.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Por favor, introduzca una dirección de correo electrónico válida");   
+            jSeparatorCorreo.setOpaque(false);
             validacion++;
+            return;
         }
-        if (num_telefono.equals("")) {
-            txt_contacto.setForeground(Color.red);
-            validacion++;
+       
+        if (!edad.matches("[0-9]+")) {
+            jSeparatorEdad.setOpaque(true);
+            jSeparatorEdad.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Solo se permite numeros");
+            return;
         }
-        if (num_identificacion.equals("")) {
-            txt_identificacion.setForeground(Color.red);
-            validacion++;
+        
+        //Validacion edad
+        int edadV = Integer.parseInt(edad);
+        if (edadV < 18 || edadV > 65) {
+            jSeparatorEdad.setOpaque(true);
+            jSeparatorEdad.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "La edad debe estar entre 18 y 65 años");
+            return;
         }
-        if (correo.equals("")) {
-            txt_correo.setForeground(Color.red);
+        
+        //Validacion longitud
+        if (num_telefono.length() != 10) {
+            jSeparatorContacto.setOpaque(true);
+            jSeparatorContacto.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "El número de contacto debe tener 10 dígitos");
             validacion++;
+            return;
         }
-        if (contrasenia.equals("")) {
-            txt_contrasenia.setForeground(Color.red);
+        if (contrasenia.length() < 10) {
+            jSeparatorContrasenia.setOpaque(true);
+            jSeparatorContrasenia.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "La contraseña debe contener al menos 10 caracteres o mas");
             validacion++;
+            return;
         }
-        if (edad.equals("")) {
-            txt_edad.setForeground(Color.red);
+        
+        if (num_identificacion.length() != 10) {
+            jSeparatorIdentificacion.setOpaque(true);
+            jSeparatorIdentificacion.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "El número de identificacion debe tener 10 dígitos");
             validacion++;
+            return;
+        }
+        
+        //Validar Texto solo caracteres
+        if(validarTexto(nombre) == false){
+            jSeparatorNombre.setOpaque(true);
+            jSeparatorNombre.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Solo se permite Texto");
+            validacion++;
+            return;
+        }
+        
+        if(validarTexto(apellido) == false){
+            jSeparatorApellido.setOpaque(true);
+            jSeparatorApellido.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Solo se permite Texto");
+            validacion++;
+            return;
+        }
+        
+        //Validar solo numeros
+        
+        if(!num_identificacion.matches("[0-9]+")){
+            jSeparatorIdentificacion.setOpaque(true);
+            jSeparatorIdentificacion.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Solo se permite numeros");
+        }
+        if(!num_telefono.matches("[0-9]+")){
+            jSeparatorContacto.setOpaque(true);
+            jSeparatorContacto.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Solo se permite numeros");
         }
 
         if (tipo_identificacion == 0) {
@@ -603,13 +708,13 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
             validacion = validacion + 1;
 
         } else if (tipo_identificacion == 1) {
-            tipo_identificacion_string = "T.I";
+            tipo_identificacion_string = "tarjeta de identidad";
 
         } else if (tipo_identificacion == 2) {
-            tipo_identificacion_string = "C.C";
+            tipo_identificacion_string = "cedula de ciudadania";
 
         } else if (tipo_identificacion == 3) {
-            tipo_identificacion_string = "C.E";
+            tipo_identificacion_string = "cedula de extranjeria";
         }
 
         try {
@@ -694,13 +799,13 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
             validacion = validacion + 1;
 
         } else if (tipo_identificacion == 1) {
-            tipo_identificacion_string = "T.I";
+            tipo_identificacion_string = "tarjeta de identidad";
 
         } else if (tipo_identificacion == 2) {
-            tipo_identificacion_string = "C.C";
+            tipo_identificacion_string = "cedula de ciudadania";
 
         } else if (tipo_identificacion == 3) {
-            tipo_identificacion_string = "C.E";
+            tipo_identificacion_string = "cedula de extranjeria";
         }
 
         try {
@@ -718,7 +823,7 @@ public class VstInformacionUsuarios extends javax.swing.JFrame {
             pst.setString(6, correo);
             pst.setString(7, contrasenia);
             pst.setString(8, edad);
-            pst.setString(9, "INACTIVO");
+            pst.setString(9, "DESACTIVAR");
             pst.setString(10, formattedDateTime);
 
             pst.executeUpdate(); //Cuando queremos actualizar datos usamos este metodo ExecuteUpdate pero cuando queremos ejecutar una consulta usamos el metodo ExecuteQuery

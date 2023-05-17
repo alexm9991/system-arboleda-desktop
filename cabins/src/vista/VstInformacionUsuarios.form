@@ -17,6 +17,10 @@
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="formMouseDragged"/>
+    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="formMousePressed"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -37,7 +41,7 @@
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="66" type="rgb"/>
+          <Color blue="59" green="a5" red="ff" type="rgb"/>
         </Property>
       </Properties>
       <Constraints>
@@ -163,7 +167,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JSeparator" name="jSeparator1">
+    <Component class="javax.swing.JSeparator" name="jSeparatorApellido">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="0" type="rgb"/>
@@ -181,7 +185,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JSeparator" name="jSeparator2">
+    <Component class="javax.swing.JSeparator" name="jSeparatorContacto">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="0" type="rgb"/>
@@ -199,7 +203,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JSeparator" name="jSeparator3">
+    <Component class="javax.swing.JSeparator" name="jSeparatorEdad">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="0" type="rgb"/>
@@ -217,7 +221,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JSeparator" name="jSeparator4">
+    <Component class="javax.swing.JSeparator" name="jSeparatorIdentificacion">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="0" type="rgb"/>
@@ -235,7 +239,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JSeparator" name="jSeparator6">
+    <Component class="javax.swing.JSeparator" name="jSeparatorCorreo">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="33" type="rgb"/>
@@ -253,7 +257,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JSeparator" name="jSeparator7">
+    <Component class="javax.swing.JSeparator" name="jSeparatorContrasenia">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="33" type="rgb"/>
@@ -378,9 +382,9 @@
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
             <StringItem index="0" value="Seleccione"/>
-            <StringItem index="1" value="T.I"/>
-            <StringItem index="2" value="C.C"/>
-            <StringItem index="3" value="C.E"/>
+            <StringItem index="1" value="tarjeta de identidad"/>
+            <StringItem index="2" value="cedula de ciudadania"/>
+            <StringItem index="3" value="cedula de extranjeria"/>
           </StringArray>
         </Property>
       </Properties>
@@ -438,6 +442,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="null"/>
         </Property>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_contraseniaActionPerformed"/>
@@ -516,7 +521,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JSeparator" name="jSeparator9">
+    <Component class="javax.swing.JSeparator" name="jSeparatorNombre">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="0" type="rgb"/>
@@ -592,7 +597,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="660" y="320" width="80" height="80"/>
+          <AbsoluteConstraints x="660" y="370" width="80" height="80"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -613,7 +618,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="780" y="320" width="90" height="80"/>
+          <AbsoluteConstraints x="780" y="370" width="90" height="80"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -627,7 +632,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="670" y="400" width="50" height="20"/>
+          <AbsoluteConstraints x="670" y="450" width="50" height="20"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -640,7 +645,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="800" y="400" width="-1" height="20"/>
+          <AbsoluteConstraints x="800" y="450" width="-1" height="20"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -667,6 +672,19 @@
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="690" y="230" width="30" height="60"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_cambiarContrasenia">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="CAMBIAR CONTRASE&#xd1;A"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_cambiarContraseniaMouseClicked"/>
+      </Events>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="690" y="305" width="190" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
