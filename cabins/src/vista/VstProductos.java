@@ -129,9 +129,7 @@ diseñoTabla.setRowCount(0);
         JOptionPane.showMessageDialog(null, "Elija el producto que desea modificar y \n"
                 + "de click sobre el boton 'Actualizar'");
     }
-    public static void main(String[] args) {
-        
-    }
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

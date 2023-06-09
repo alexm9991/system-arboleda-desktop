@@ -1,23 +1,62 @@
 package modelo;
 
 import java.util.Date;
-import java.util.List;
 
 public class MdlServicios {
 
     private int id;
+    private int idFUno;
+    private int total;
+    private String reglas;
+    private String url;
+    private String nombre_img;
     private String nombre_servicio;
+    private String nombre_detalle_servicio;
     private String descripcion;
     private String estado;
     private Date fecha_registro;
     private Date fecha_modificacion;
-    private int p_adulto;
-    private int p_nino;
-    private List<String> urls;
-    private int idFUno;
-    private int idFDos;
-    private int total;
-    
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public String getNombre_img() {
+        return nombre_img;
+    }
+
+    public void setNombre_img(String nombre_img) {
+        this.nombre_img = nombre_img;
+    }
+
+    public String getNombre_detalle_servicio() {
+        return nombre_detalle_servicio;
+    }
+
+    public void setNombre_detalle_servicio(String nombre_detalle_servicio) {
+        this.nombre_detalle_servicio = nombre_detalle_servicio;
+    }
+
+    public String getReglas() {
+        return reglas;
+    }
+
+    public void setReglas(String reglas) {
+        this.reglas = reglas;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public int getId() {
         return id;
     }
@@ -66,31 +105,6 @@ public class MdlServicios {
         this.fecha_modificacion = fecha_modificacion;
     }
 
-    public int getP_adulto() {
-        return p_adulto;
-    }
-
-    public void setP_adulto(int p_adulto) {
-        this.p_adulto = p_adulto;
-    }
-
-    public int getP_nino() {
-        return p_nino;
-    }
-
-    public void setP_nino(int p_nino) {
-        this.p_nino = p_nino;
-    }
-
-    public List<String> getUrls() {
-        return urls;
-    }
-
-    public void setUrls(List<String> urls) {
-        this.urls = urls;
-    }
-
-   
     public int getIdFUno() {
         return idFUno;
     }
@@ -98,21 +112,4 @@ public class MdlServicios {
     public void setIdFUno(int idFUno) {
         this.idFUno = idFUno;
     }
-
-    public int getIdFDos() {
-        return idFDos;
-    }
-
-    public void setIdFDos(int idFDos) {
-        this.idFDos = idFDos;
-    }
-
-    public int getTotal() {
-        return total;
-    }
-
-    public void setTotal(int total) {
-        this.total = total;
-    }
-
 }

@@ -44,9 +44,6 @@ public class VstReports extends vista.VstBase {
         setExtendedState(ICONIFIED);
     }
 
-    public static void main(String[] args) {
-
-    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

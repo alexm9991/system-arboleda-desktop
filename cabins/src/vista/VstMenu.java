@@ -355,7 +355,7 @@ public class VstMenu extends VstBase {
     }//GEN-LAST:event_btn_gestionUsuariosActionPerformed
 
     private void btn_gestionServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_gestionServiciosActionPerformed
-        VstServicios abrir = new VstServicios();
+        VstGestionServicios abrir = new VstGestionServicios();
         abrir.setVisible(true);
     }//GEN-LAST:event_btn_gestionServiciosActionPerformed
 
@@ -369,15 +369,15 @@ public class VstMenu extends VstBase {
         abrir.setVisible(true);
     }//GEN-LAST:event_btn_gestionReportesActionPerformed
 
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VstMenu().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//  
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new VstMenu().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_gestionProductos;

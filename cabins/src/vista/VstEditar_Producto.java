@@ -161,7 +161,6 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(714, 520));
-        setPreferredSize(new java.awt.Dimension(1105, 550));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbl_salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/errorBlanco.png"))); // NOI18N
@@ -337,7 +336,7 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 810, 520));
 
-        jPanel2.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel2.setBackground(new java.awt.Color(255, 165, 89));
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 600));
 
         pack();
@@ -442,14 +441,7 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
         this.setLocation(X - x/2, Y-y/2);
     }//GEN-LAST:event_jPanel3MouseDragged
     
-    public static void main(String args[]) {
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VstEditar_Producto().setVisible(true);
-            }
-        });
-    }
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton BtnAceptarEditar;

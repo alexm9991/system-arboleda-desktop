@@ -106,7 +106,7 @@ public class VstServicios extends VstBase {
     //OBTIENE LOS DATOS DE LA TABLA Y LOS MUESTRA EN LOS CAMPOS DE LA INTERFAZ
     public void llenarDatos(MdlServicios servicio) {
         CtrServicios ctrServicios = new CtrServicios();
-        ctrServicios.consultarPrecios(servicio);
+//        ctrServicios.consultarPrecios(servicio);
         consultar_imagen(servicio);
         txt_id.setText(String.valueOf(servicio.getId()));
         txt_nombre.setText(servicio.getNombre_servicio());
@@ -120,8 +120,8 @@ public class VstServicios extends VstBase {
             }
         }
 
-        txt_precioA.setText(String.valueOf(servicio.getP_adulto()));
-        txt_precioN.setText(String.valueOf(servicio.getP_nino()));
+      //  txt_precioA.setText(String.valueOf(servicio.getP_adulto()));
+       // txt_precioN.setText(String.valueOf(servicio.getP_nino()));
         spn_cantidad.setValue(servicio.getTotal());
 
     }
@@ -138,9 +138,9 @@ public class VstServicios extends VstBase {
 
         String[] fila = new String[1];
         tablaI.addColumn("Url");
-        lista_imagen = ctrServicios.consultar_imagen(servicio);
+       // lista_imagen = ctrServicios.consultar_imagen(servicio);
         for (int consecutivo = 0; consecutivo < lista_imagen.size(); consecutivo++) {
-            fila[0] = lista_imagen.get(consecutivo).getUrls().get(consecutivo); 
+            //fila[0] = lista_imagen.get(consecutivo).getUrls().get(consecutivo); 
             System.out.println(lista_imagen);
             tablaI.addRow(fila);
         }
@@ -205,16 +205,16 @@ public class VstServicios extends VstBase {
         mdlServicio.setDescripcion(txa_descripcion.getText());
         mdlServicio.setEstado(cmb_estado.getSelectedItem().toString());
         mdlServicio.setTotal(Integer.parseInt(spn_cantidad.getValue().toString()));
-        mdlServicio.setP_adulto(Integer.parseInt(txt_precioA.getText()));
-        mdlServicio.setP_nino(Integer.parseInt(txt_precioN.getText()));
+//        mdlServicio.setP_adulto(Integer.parseInt(txt_precioA.getText()));
+     //   mdlServicio.setP_nino(Integer.parseInt(txt_precioN.getText()));
         
         List<String> lUrls = new ArrayList<>();
         for (int i = 0; i <= tbl_imagen.getRowCount(); i++){
 //            lUrls.add(tbl_imagen.getValueAt(0, i).toString()); 
         }
-        mdlServicio.setUrls(lUrls); 
+       // mdlServicio.setUrls(lUrls); 
         // m_servicio.setUrl(tbl_imagen.ruta);
-        ctrServicios.guardarServicio(mdlServicio);
+        //ctrServicios.guardarServicio(mdlServicio);
         limpiar();
         limpiarTabla();
         limpiarTablaImagenTemporal();
@@ -231,10 +231,10 @@ public class VstServicios extends VstBase {
         mdlServicio.setDescripcion(txa_descripcion.getText());
         mdlServicio.setEstado(cmb_estado.getSelectedItem().toString());
         mdlServicio.setTotal(Integer.parseInt(spn_cantidad.getValue().toString()));
-        mdlServicio.setP_adulto(Integer.parseInt(txt_precioA.getText()));
-        mdlServicio.setP_nino(Integer.parseInt(txt_precioN.getText()));
+//        mdlServicio.setP_adulto(Integer.parseInt(txt_precioA.getText()));
+       // mdlServicio.setP_nino(Integer.parseInt(txt_precioN.getText()));
 
-        ctrServicios.modificar(mdlServicio);
+      //  ctrServicios.modificar(mdlServicio);
         limpiar();
         limpiarTabla();
         consultar();
@@ -913,37 +913,7 @@ public class VstServicios extends VstBase {
         super.presionVentana(evt);
     }//GEN-LAST:event_formMousePressed
 
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VstServicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VstServicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VstServicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VstServicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VstServicios().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_agregar;
