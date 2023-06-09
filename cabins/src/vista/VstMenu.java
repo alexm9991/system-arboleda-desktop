@@ -1,6 +1,6 @@
 package vista;
 
-import Vista.VstProductos;
+import vista.VstProductos;
 import java.awt.Color;
 import java.awt.Component;
 import vista.VstGestionUsuarios;

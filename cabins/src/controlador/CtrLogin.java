@@ -1,11 +1,11 @@
 
 package controlador;
+import vista.VstMenu;
 import conexion.conexionMensaje;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
-import vista.*;
 
 public class CtrLogin {
     conexionMensaje cc = new conexionMensaje();

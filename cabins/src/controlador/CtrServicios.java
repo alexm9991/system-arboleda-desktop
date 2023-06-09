@@ -269,8 +269,16 @@ public class CtrServicios {
                 // Método para crear un código aleatorio para la imagen
                 long timestamp = System.currentTimeMillis();
                 String urlImagenOrigen = fila[0].toString();
-                String nombreImagen = timestamp + "_" + fila[1].toString();
-
+                String img = fila[1].toString();
+                String nombreImagen = timestamp + "_";
+                for (int i = 0; i < img.length(); i++) {
+                    if (img.charAt(i) == ' ') {
+                        nombreImagen += "";
+                        
+                    } else {
+                        nombreImagen += img.charAt(i);
+                    }
+                }
                 try {
                     ftpClient.connect("ftp.fincaturisticalaarboleda.com", 21); // Establece la conexión FTP con el host y el puerto correspondientes
                     ftpClient.login("admin@fincaturisticalaarboleda.com", "Cabins.123"); // Inicia sesión en el servidor FTP con las credenciales adecuadas
@@ -422,8 +430,15 @@ public class CtrServicios {
                     // Metodo para crear un codigo aleatorio para la imagen
                     long timestamp = System.currentTimeMillis();
                     String urlImagenOrigen = fila[0].toString();
-                    String nombreImagen = timestamp + "_" + fila[1].toString();
-
+                    String img = fila[1].toString();
+                     String nombreImagen = timestamp + "_";
+                    for (int i = 0; i < img.length(); i++) {
+                    if (img.charAt(i) == ' ') {
+                        nombreImagen += "";                    
+                    } else {
+                        nombreImagen += img.charAt(i);
+                    }
+                    }
                     ftpClient.connect("ftp.fincaturisticalaarboleda.com", 21); // Establece la conexión FTP con el host y el puerto correspondientes
                     ftpClient.login("admin@fincaturisticalaarboleda.com", "Cabins.123"); // Inicia sesión en el servidor FTP con las credenciales adecuadas
                     ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE); // Establece el tipo de archivo a binario

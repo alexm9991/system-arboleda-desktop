@@ -1,4 +1,4 @@
-package Vista;
+package vista;
 
 import Controlador.CtrlProductos;
 import Modelo.MdlProductos;

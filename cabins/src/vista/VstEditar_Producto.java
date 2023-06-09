@@ -1,8 +1,8 @@
-package Vista;
+package vista;
 
 import conexion.conexionMensaje;
 import Controlador.CtrlProductos;
-import Vista.VstProductos;
+import vista.VstProductos;
 import Modelo.MdlProductos;
 import com.sun.awt.AWTUtilities;
 import java.awt.Color;

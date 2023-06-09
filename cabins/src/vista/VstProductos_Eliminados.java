@@ -1,4 +1,4 @@
-package Vista;
+package vista;
 
 import conexion.conexionMensaje;
 import Controlador.CtrlProductos;

@@ -149,7 +149,6 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("GESTION DE USUARIOS");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
 
@@ -171,9 +170,7 @@ public class VstGestionUsuarios extends javax.swing.JFrame {
         });
         getContentPane().add(lbl_lupa, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 30, 20));
 
-        txtBuscar.setBackground(new java.awt.Color(255, 255, 255));
         txtBuscar.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        txtBuscar.setForeground(new java.awt.Color(0, 0, 0));
         txtBuscar.setBorder(null);
         txtBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
