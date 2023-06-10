@@ -4,8 +4,14 @@
  * and open the template in the editor.
  */
 package jasperReportsController;
-
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import conexion.ConexionReports;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,31 +28,58 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author ELCAP
  */
 public class ReportGenerator {
-
+  
     //Usuarios
-    public static final String REPORT_ACTIVE_USERS = "src/reports/rpActiveUsers.jasper";
-    public static final String REPORT_INACTIVE_USERS = "src/reports/rpInactiveUsers.jasper";
+    public static final String REPORT_ACTIVE_USERS = "rpActiveUsers.jasper";
+    public static final String REPORT_INACTIVE_USERS = "rpInactiveUsers.jasper";
+    
     //Productos
-    public static final String REPORT_ACTIVE_PRODUCTS = "src/reports/rpActiveProducts.jasper";
-    public static final String REPORT_INACTIVE_PRODUCTS = "src/reports/rpInactiveProducts.jasper";
+    public static final String REPORT_ACTIVE_PRODUCTS = "rpActiveProducts.jasper";
+    public static final String REPORT_INACTIVE_PRODUCTS = "rpInactiveProducts.jasper";
     //Servicios
-    public static final String REPORT_ACTIVE_SERVICES = "src/reports/rpServicesActive.jasper";
-    public static final String REPORT_INACTIVE_SERVICES = "src/reports/rpServicesInactive.jasper";
+    public static final String REPORT_ACTIVE_SERVICES = "rpServicesActive.jasper";
+    public static final String REPORT_INACTIVE_SERVICES = "rpServicesInactive.jasper";
     //Reservas
-    public static final String REPORT_ACTIVE_BOOKINGS = "src/reports/rpActiveBookings.jasper";
-    public static final String REPORT_INACTIVE_BOOKINGS = "src/reports/rpInactiveBookings.jasper";
+    public static final String REPORT_ACTIVE_BOOKINGS = "rpActiveBookings.jasper";
+    public static final String REPORT_INACTIVE_BOOKINGS = "rpInactiveBookings.jasper";
 
     //PQRS
-    public static final String REPORT_PQRS_GESTIONADAS = "src/reports/rpPqrsGestionado.jasper";
-    public static final String REPORT_PQRS_NO_GESTIONADAS = "src/reports/rpPqrsNoGestionado.jasper";
-    public static final String REPORT_PQRS_EN_PROCESO = "src/reports/rpPqrsProceso.jasper";
+    public static final String REPORT_PQRS_GESTIONADAS = "rpPqrsGestionado.jasper";
+    public static final String REPORT_PQRS_NO_GESTIONADAS = "rpPqrsNoGestionado.jasper";
+    public static final String REPORT_PQRS_EN_PROCESO = "rpPqrsProceso.jasper";
+    
+   private static String getReportPath(String reportName) {
+    try {
+        InputStream inputStream = ReportGenerator.class.getResourceAsStream("/reports/" + reportName);
+        if (inputStream == null) {
+            throw new RuntimeException("No se encontró el archivo de informe: " + reportName);
+        }
+
+        File tempFile = File.createTempFile("report", ".jasper");
+        tempFile.deleteOnExit();
+
+        try (OutputStream outputStream = new FileOutputStream(tempFile)) {
+            byte[] buffer = new byte[8192];
+            int bytesRead;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+        }
+
+        return tempFile.getAbsolutePath();
+    } catch (IOException e) {
+        throw new RuntimeException("Error al crear archivo temporal para el informe: " + reportName, e);
+    }
+}
     
     //REPORTES DE USUARIOS
     public static JasperPrint rpActiveUsers() {
         try {
-            JasperPrint reporteLleno = JasperFillManager.fillReport(REPORT_ACTIVE_USERS, new HashMap(), ConexionReports.getMySqlConnection());
+            String reportPath = getReportPath(REPORT_ACTIVE_USERS);
+            JasperPrint reporteLleno = JasperFillManager.fillReport(reportPath, new HashMap(), ConexionReports.getMySqlConnection());
             return reporteLleno;
         } catch (JRException ex) {
+            ex.printStackTrace(); // Imprimir la traza de la excepción en la consola
             Logger.getLogger(VstReports.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
@@ -54,8 +87,10 @@ public class ReportGenerator {
 
     public static JasperPrint rpInactiveUsers() {
         try {
-            JasperPrint reporteLleno = JasperFillManager.fillReport(REPORT_INACTIVE_USERS, new HashMap(), ConexionReports.getMySqlConnection());
+           String reportPath = getReportPath(REPORT_INACTIVE_USERS);
+            JasperPrint reporteLleno = JasperFillManager.fillReport(reportPath, new HashMap(), ConexionReports.getMySqlConnection());
             return reporteLleno;
+            
         } catch (JRException ex) {
             Logger.getLogger(VstReports.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -65,7 +100,8 @@ public class ReportGenerator {
     //REPORTES DE PRODUCTOS
     public static JasperPrint rpActiveProducts() {
         try {
-            JasperPrint reporteLleno = JasperFillManager.fillReport(REPORT_ACTIVE_PRODUCTS, new HashMap(), ConexionReports.getMySqlConnection());
+            String reportPath = getReportPath(REPORT_ACTIVE_PRODUCTS);
+            JasperPrint reporteLleno = JasperFillManager.fillReport(reportPath, new HashMap(), ConexionReports.getMySqlConnection());
             return reporteLleno;
         } catch (JRException ex) {
             ex.printStackTrace(); // Imprimir la traza de la excepción en la consola
@@ -76,7 +112,8 @@ public class ReportGenerator {
 
     public static JasperPrint rpInactiveProducts() {
         try {
-            JasperPrint reporteLleno = JasperFillManager.fillReport(REPORT_INACTIVE_PRODUCTS, new HashMap(), ConexionReports.getMySqlConnection());
+            String reportPath = getReportPath(REPORT_INACTIVE_PRODUCTS);
+            JasperPrint reporteLleno = JasperFillManager.fillReport(reportPath, new HashMap(), ConexionReports.getMySqlConnection());
             return reporteLleno;
         } catch (JRException ex) {
             ex.printStackTrace(); // Imprimir la traza de la excepción en la consola
@@ -88,7 +125,8 @@ public class ReportGenerator {
     //REPORTE DE SERVICIOS
     public static JasperPrint rpActiveServices() {
         try {
-            JasperPrint reporteLleno = JasperFillManager.fillReport(REPORT_ACTIVE_SERVICES, new HashMap(), ConexionReports.getMySqlConnection());
+            String reportPath = getReportPath(REPORT_ACTIVE_SERVICES);
+            JasperPrint reporteLleno = JasperFillManager.fillReport(reportPath, new HashMap(), ConexionReports.getMySqlConnection());
             return reporteLleno;
         } catch (JRException ex) {
             ex.printStackTrace(); // Imprimir la traza de la excepción en la consola
@@ -99,7 +137,8 @@ public class ReportGenerator {
 
     public static JasperPrint rpInactiveServices() {
         try {
-            JasperPrint reporteLleno = JasperFillManager.fillReport(REPORT_INACTIVE_SERVICES, new HashMap(), ConexionReports.getMySqlConnection());
+            String reportPath = getReportPath(REPORT_INACTIVE_SERVICES);
+            JasperPrint reporteLleno = JasperFillManager.fillReport(reportPath, new HashMap(), ConexionReports.getMySqlConnection());
             return reporteLleno;
         } catch (JRException ex) {
             ex.printStackTrace(); // Imprimir la traza de la excepción en la consola
@@ -111,7 +150,8 @@ public class ReportGenerator {
     //REPORTES DE RESERVAS
     public static JasperPrint rpActiveBookings() {
         try {
-            JasperPrint reporteLleno = JasperFillManager.fillReport(REPORT_ACTIVE_BOOKINGS, new HashMap(), ConexionReports.getMySqlConnection());
+             String reportPath = getReportPath(REPORT_ACTIVE_BOOKINGS);
+            JasperPrint reporteLleno = JasperFillManager.fillReport(reportPath, new HashMap(), ConexionReports.getMySqlConnection());
             return reporteLleno;
         } catch (JRException ex) {
             ex.printStackTrace(); // Imprimir la traza de la excepción en la consola
@@ -122,7 +162,8 @@ public class ReportGenerator {
 
     public static JasperPrint rpInactiveBookings() {
         try {
-            JasperPrint reporteLleno = JasperFillManager.fillReport(REPORT_INACTIVE_BOOKINGS, new HashMap(), ConexionReports.getMySqlConnection());
+             String reportPath = getReportPath(REPORT_INACTIVE_BOOKINGS);
+            JasperPrint reporteLleno = JasperFillManager.fillReport(reportPath, new HashMap(), ConexionReports.getMySqlConnection());
             return reporteLleno;
         } catch (JRException ex) {
             ex.printStackTrace(); // Imprimir la traza de la excepción en la consola
@@ -134,7 +175,8 @@ public class ReportGenerator {
     //REPORTES DE PQRS
     public static JasperPrint rpPqrsGestionado() {
         try {
-            JasperPrint reporteLleno = JasperFillManager.fillReport(REPORT_PQRS_GESTIONADAS, new HashMap(), ConexionReports.getMySqlConnection());
+           String reportPath = getReportPath(REPORT_PQRS_GESTIONADAS);
+            JasperPrint reporteLleno = JasperFillManager.fillReport(reportPath, new HashMap(), ConexionReports.getMySqlConnection());
             return reporteLleno;
         } catch (JRException ex) {
             ex.printStackTrace(); // Imprimir la traza de la excepción en la consola
@@ -145,7 +187,8 @@ public class ReportGenerator {
 
     public static JasperPrint rpPqrsNoGestionado() {
         try {
-            JasperPrint reporteLleno = JasperFillManager.fillReport(REPORT_PQRS_NO_GESTIONADAS, new HashMap(), ConexionReports.getMySqlConnection());
+           String reportPath = getReportPath(REPORT_PQRS_NO_GESTIONADAS);
+            JasperPrint reporteLleno = JasperFillManager.fillReport(reportPath, new HashMap(), ConexionReports.getMySqlConnection());
             return reporteLleno;
         } catch (JRException ex) {
             ex.printStackTrace(); // Imprimir la traza de la excepción en la consola
@@ -156,7 +199,8 @@ public class ReportGenerator {
     
         public static JasperPrint rpPqrsProceso() {
         try {
-            JasperPrint reporteLleno = JasperFillManager.fillReport(REPORT_PQRS_EN_PROCESO, new HashMap(), ConexionReports.getMySqlConnection());
+            String reportPath = getReportPath(REPORT_PQRS_EN_PROCESO);
+            JasperPrint reporteLleno = JasperFillManager.fillReport(reportPath, new HashMap(), ConexionReports.getMySqlConnection());
             return reporteLleno;
         } catch (JRException ex) {
             ex.printStackTrace(); // Imprimir la traza de la excepción en la consola

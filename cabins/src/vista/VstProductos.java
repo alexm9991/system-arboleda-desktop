@@ -1,13 +1,17 @@
 package vista;
 
 import Controlador.CtrlProductos;
-import Modelo.MdlProductos;
+import modelo.MdlProductos;
 import conexion.conexionMensaje;
 import VstRecursos.RenderTable;
 import java.awt.Color;
+import java.net.MalformedURLException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import vista.VstEditar_Producto;
 
 public class VstProductos extends vista.VstBase{
 
@@ -322,7 +326,11 @@ diseñoTabla.setRowCount(0);
                 if (boton.getName().equals("btnActualizar")) {
                     VstEditar_Producto ig = new VstEditar_Producto();
 
-                    ig.traerDatos(idRetornar);
+                    try {
+                        ig.traerDatos(idRetornar);
+                    } catch (MalformedURLException ex) {
+                        Logger.getLogger(VstProductos.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     ig.setVisible(true);
 
                 }

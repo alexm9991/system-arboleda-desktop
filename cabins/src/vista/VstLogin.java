@@ -9,6 +9,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import controlador.CtrEncrypt;
+import java.io.IOException;
+import java.io.InputStream;
+import javax.imageio.ImageIO;
 
 /**
  * @author jorge
@@ -22,9 +25,33 @@ public class VstLogin extends VstBase {
     public VstLogin() {
         super();
         initComponents();
-        SetImageLabel(lbl_logo, "src/assets/logo.jpg");
+        SetImageLabel(lbl_logo, "/assets/logo.jpg");
         bordePantalla();
     }
+    
+    private void SetImageLabel(JLabel label, String imagePath) {
+    try {
+        // Cargar la imagen desde el archivo dentro del JAR
+        InputStream inputStream = getClass().getResourceAsStream(imagePath);
+        if (inputStream == null) {
+            throw new RuntimeException("No se encontró el archivo de imagen: " + imagePath);
+        }
+        
+        // Crear un ImageIcon a partir del InputStream
+        ImageIcon imageIcon = new ImageIcon(ImageIO.read(inputStream));
+        
+        // Escalar la imagen si es necesario
+        Image scaledImage = imageIcon.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
+        
+        // Establecer la imagen en el JLabel
+        label.setIcon(new ImageIcon(scaledImage));
+    } catch (IOException e) {
+        throw new RuntimeException("Error al cargar la imagen: " + imagePath, e);
+    }
+}
+
+
+
 
     // hover salir
     public void salirEntered(java.awt.event.MouseEvent evt) {
@@ -44,14 +71,14 @@ public class VstLogin extends VstBase {
         lbl_minimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/circuloBlanco.png")));
     }
 
-    private void SetImageLabel(JLabel labelName, String root) {
-        ImageIcon image = new ImageIcon(root);
-        Icon icon = new ImageIcon(
-                image.getImage().getScaledInstance(labelName.getWidth(), labelName.getHeight(), Image.SCALE_DEFAULT));
-        labelName.setIcon(icon);
-        this.repaint();
-
-    }
+//    private void SetImageLabel(JLabel labelName, String root) {
+//        ImageIcon image = new ImageIcon(root);
+//        Icon icon = new ImageIcon(
+//                image.getImage().getScaledInstance(labelName.getWidth(), labelName.getHeight(), Image.SCALE_DEFAULT));
+//        labelName.setIcon(icon);
+//        this.repaint();
+//
+//    }
 
     
 

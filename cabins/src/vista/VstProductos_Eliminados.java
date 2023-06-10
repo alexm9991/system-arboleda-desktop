@@ -2,13 +2,13 @@ package vista;
 
 import conexion.conexionMensaje;
 import Controlador.CtrlProductos;
-import Modelo.MdlProductos;
 import VstRecursos.RenderTable;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.MdlProductos;
 
 /**
  *
@@ -67,10 +67,8 @@ public void atrasEntered(java.awt.event.MouseEvent evt){
             JButton botonRestaurar=new JButton("Restaurar");
             botonRestaurar.setName("btnRestaurar");
             
-    JButton botonBorrar=new JButton("Borrar");
-    botonBorrar.setName("btnBorrar");
     
-    String[] titulo=new String[]{"Nombre","Precio","  ", " "};
+    String[] titulo=new String[]{"Nombre","Precio","  "};
       diseñoTablaEliminados.setColumnIdentifiers(titulo);
       
       tdlDatosEliminados.setModel(diseñoTablaEliminados);
@@ -80,8 +78,7 @@ public void atrasEntered(java.awt.event.MouseEvent evt){
             tdlDatosEliminados.setValueAt(listaProductosEliminado.get(consecutivo).getNameProduct(), consecutivo, 0);
             tdlDatosEliminados.setValueAt(listaProductosEliminado.get(consecutivo).getPrice(), consecutivo,1);
             tdlDatosEliminados.setValueAt(listaProductosEliminado.get(consecutivo).getId(), consecutivo,2);
-            tdlDatosEliminados.setValueAt(botonRestaurar, consecutivo,2);
-            tdlDatosEliminados.setValueAt(botonBorrar, consecutivo,3);       
+            tdlDatosEliminados.setValueAt(botonRestaurar, consecutivo,2);    
         }
     }
     
@@ -105,20 +102,9 @@ public void atrasEntered(java.awt.event.MouseEvent evt){
             remove(btnPregunta);
         }
     }
-     public void preguntaBorrar(int idRetornar){
-        int btnPregunta=JOptionPane.showConfirmDialog( this, "Estas seguro de querer borrar este producto de forma definitiva?, no podra recuperar esta información","ADVERTENCIA",btnPregunta=0);
-        if(btnPregunta==JOptionPane.YES_OPTION){
-            CtrlProductos control = new CtrlProductos();
-            MdlProductos producto = new MdlProductos();
-            
-            control.borrar(producto,Traerid());
-            
-        }else{
-            remove(btnPregunta);
-        }
-    }
+    
    
- 
+    
     
     public int Traerid(){
     
@@ -243,10 +229,7 @@ diseñoTablaEliminados.setRowCount(0);
                     Traerid();
         preguntaRestaurar(idRetornar);
                 }
-                if(boton.getName().equals("btnBorrar")){
-                Traerid();
-                preguntaBorrar(idRetornar);
-                }
+               
             }
         }
     }//GEN-LAST:event_tdlDatosEliminadosMouseClicked

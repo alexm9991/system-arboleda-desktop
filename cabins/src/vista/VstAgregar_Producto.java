@@ -7,7 +7,6 @@ package vista;
 
 import conexion.conexionMensaje;
 import Controlador.CtrlProductos;
-import Modelo.MdlProductos;
 import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
@@ -20,32 +19,35 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import modelo.MdlProductos;
 
 /**
  *
  * @author SENA
  */
 public class VstAgregar_Producto extends vista.VstBase {
+
     JFileChooser seleccionado = new JFileChooser();
     File archivo;
     byte[] byteImg;
     CtrlProductos gestion = new CtrlProductos();
 
     ArrayList<MdlProductos> Producto = new ArrayList();
-    
+
     conexionMensaje con = new conexionMensaje();
     conexionMensaje conexion = new conexionMensaje();
-   Long datetime = System.currentTimeMillis(); 
-        Timestamp timestamp = new Timestamp(datetime);
+    Long datetime = System.currentTimeMillis();
+    Timestamp timestamp = new Timestamp(datetime);
     Calendar fecha = new GregorianCalendar();
-    
-public void Fecha() {
-        lblfecha.setText(String.valueOf(timestamp));  
+
+    public void Fecha() {
+        lblfecha.setText(String.valueOf(timestamp));
     }
 
     public VstAgregar_Producto() {
         initComponents();
-          bordePantalla();
+        bordePantalla();
         this.setLocationRelativeTo(null);
         aviso.setVisible(false);
         aviso2.setVisible(false);
@@ -53,25 +55,30 @@ public void Fecha() {
         Fecha();
         getContentPane().setBackground(new Color(255, 255, 255));
     }
-public void salirEntered(java.awt.event.MouseEvent evt){
-           lbl_salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/errorNegro.png")));
-        }
-public void salirExited(java.awt.event.MouseEvent evt){
-           lbl_salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/errorBlanco.png")));
-        }
-public void cerrarVentana(java.awt.event.MouseEvent evt){
-       this.setVisible(false);
-}
 
-public void minimizarEntered(java.awt.event.MouseEvent evt){
-           lbl_minimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/circuloNegro.png")));
-        }
-public void minimizarExited(java.awt.event.MouseEvent evt){
-           lbl_minimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/circuloBlanco.png")));
-        }
-public void minimizarVentana(java.awt.event.MouseEvent evt){
-    setExtendedState(ICONIFIED);
-}
+    public void salirEntered(java.awt.event.MouseEvent evt) {
+        lbl_salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/errorNegro.png")));
+    }
+
+    public void salirExited(java.awt.event.MouseEvent evt) {
+        lbl_salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/errorBlanco.png")));
+    }
+
+    public void cerrarVentana(java.awt.event.MouseEvent evt) {
+        this.setVisible(false);
+    }
+
+    public void minimizarEntered(java.awt.event.MouseEvent evt) {
+        lbl_minimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/circuloNegro.png")));
+    }
+
+    public void minimizarExited(java.awt.event.MouseEvent evt) {
+        lbl_minimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/circuloBlanco.png")));
+    }
+
+    public void minimizarVentana(java.awt.event.MouseEvent evt) {
+        setExtendedState(ICONIFIED);
+    }
 
     public void llenarDato(MdlProductos mdlProductos) {
         TxtNombreProductoAgregar.setText(String.valueOf(mdlProductos.getNameProduct()));
@@ -80,6 +87,7 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
         lblruta.setText(String.valueOf(mdlProductos.getRutaImg()));
 
     }
+
     public void limpiar() {
         TxtNombreProductoAgregar.setText(" ");
         TxtDescripcionProductoAgregar.setText(" ");
@@ -89,24 +97,27 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
         lblfecha.setText(String.valueOf(timestamp));
         lblestado.setText(" ");
     }
+
     public void Guardar() {
         int i = JOptionPane.showConfirmDialog(null, "Seguro Quieres Guardar El Producto?", "ADVERTENCIA", i = 0);
         if (i == JOptionPane.YES_OPTION) {
-        
-        MdlProductos mdlproductos = new MdlProductos();
-        CtrlProductos ctrlproductos = new CtrlProductos();
-        mdlproductos.setNameProduct(TxtNombreProductoAgregar.getText());
-        mdlproductos.setPrice(Float.parseFloat(TxtPrecioProductoAgregar.getText()));
-        mdlproductos.setRutaImg(lblruta.getText());
-        mdlproductos.setCreateTime(timestamp);
-        mdlproductos.setDescripcion(TxtDescripcionProductoAgregar.getText());
-        mdlproductos.setStateRecord("activar");
-        ctrlproductos.guardarProductos(mdlproductos);;
-        limpiar();
-    }else if (i == 1 || i == 2) {
+
+            MdlProductos mdlproductos = new MdlProductos();
+            CtrlProductos ctrlproductos = new CtrlProductos();
+
+            mdlproductos.setNameProduct(TxtNombreProductoAgregar.getText());
+            mdlproductos.setPrice(Float.parseFloat(TxtPrecioProductoAgregar.getText()));
+            mdlproductos.setRutaImg(lblruta.getText());
+            mdlproductos.setCreateTime(timestamp);
+            mdlproductos.setDescripcion(TxtDescripcionProductoAgregar.getText());
+            mdlproductos.setStateRecord("ACTIVAR");
+            ctrlproductos.guardarProductos(mdlproductos);
+            limpiar();
+        } else if (i == 1 || i == 2) {
             JOptionPane.showMessageDialog(null, "Producto No Agregado");
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -212,6 +223,11 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
                 TxtNombreProductoAgregarActionPerformed(evt);
             }
         });
+        TxtNombreProductoAgregar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtNombreProductoAgregarKeyTyped(evt);
+            }
+        });
         jPanel1.add(TxtNombreProductoAgregar);
         TxtNombreProductoAgregar.setBounds(80, 120, 210, 30);
 
@@ -313,6 +329,11 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
                 TxtPrecioProductoAgregarActionPerformed(evt);
             }
         });
+        TxtPrecioProductoAgregar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtPrecioProductoAgregarKeyTyped(evt);
+            }
+        });
         jPanel1.add(TxtPrecioProductoAgregar);
         TxtPrecioProductoAgregar.setBounds(80, 190, 210, 30);
         jPanel1.add(jSeparator3);
@@ -321,6 +342,11 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
         TxtDescripcionProductoAgregar.setColumns(20);
         TxtDescripcionProductoAgregar.setRows(5);
         TxtDescripcionProductoAgregar.setBorder(null);
+        TxtDescripcionProductoAgregar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtDescripcionProductoAgregarKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(TxtDescripcionProductoAgregar);
 
         jPanel1.add(jScrollPane1);
@@ -384,17 +410,21 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
     }//GEN-LAST:event_lblrutaComponentAdded
 
     private void btnAggImgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAggImgActionPerformed
+        JFileChooser seleccionado = new JFileChooser();
+        FileNameExtensionFilter filtrado = new FileNameExtensionFilter("JPG, PNG & JPEG", "jpg", "png", "jpeg");
+        seleccionado.setFileFilter(filtrado);
+        
         if (seleccionado.showDialog(null, "Abrir Imagen") == JFileChooser.APPROVE_OPTION) {
             archivo = seleccionado.getSelectedFile();
             lblruta.setText(String.valueOf(archivo));
             if (archivo.canRead()) {
                 if (archivo.getName().endsWith("jpg") || archivo.getName().endsWith("png")
-                    || archivo.getName().endsWith("gif") || archivo.getName().endsWith("jpeg")
-                    || archivo.getName().endsWith("JPG") || archivo.getName().endsWith("PNG")
-                    || archivo.getName().endsWith("JPEG")) {
+                        || archivo.getName().endsWith("gif") || archivo.getName().endsWith("jpeg")
+                        || archivo.getName().endsWith("JPG") || archivo.getName().endsWith("PNG")
+                        || archivo.getName().endsWith("JPEG")) {
                     byteImg = gestion.AbrirImagen(archivo);
 
-                    rsscalelabel.RSScaleLabel.setScaleLabel(lblImagen, String.valueOf(archivo) );
+                    rsscalelabel.RSScaleLabel.setScaleLabel(lblImagen, String.valueOf(archivo));
                 } else {
                     JOptionPane.showMessageDialog(null, "Por Favor Seleccione Un Archivo De Imagen");
                 }
@@ -419,33 +449,56 @@ public void minimizarVentana(java.awt.event.MouseEvent evt){
     }//GEN-LAST:event_BtnAceptarAgregarActionPerformed
 
     private void TxtPrecioProductoAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtPrecioProductoAgregarActionPerformed
-        // TODO add your handling code here:
+
+
     }//GEN-LAST:event_TxtPrecioProductoAgregarActionPerformed
 
     private void TxtNombreProductoAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNombreProductoAgregarActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_TxtNombreProductoAgregarActionPerformed
 
     private void lblfechaComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_lblfechaComponentAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_lblfechaComponentAdded
-int xx,xy;
+    int xx, xy;
     private void jPanel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MousePressed
-         xx=evt.getX();
-        xy=evt.getY();
+        xx = evt.getX();
+        xy = evt.getY();
     }//GEN-LAST:event_jPanel3MousePressed
 
     private void jPanel3MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseDragged
-        int x=evt.getXOnScreen();
-        int y=evt.getYOnScreen();
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
 
-        this.setLocation(x-xx, y-xy);
+        this.setLocation(x - xx, y - xy);
     }//GEN-LAST:event_jPanel3MouseDragged
+
+    private void TxtPrecioProductoAgregarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtPrecioProductoAgregarKeyTyped
+        char validar = evt.getKeyChar();
+
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_TxtPrecioProductoAgregarKeyTyped
+
+    private void TxtNombreProductoAgregarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtNombreProductoAgregarKeyTyped
+        if (TxtNombreProductoAgregar.getText().length() >= 30) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxtNombreProductoAgregarKeyTyped
+
+    private void TxtDescripcionProductoAgregarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtDescripcionProductoAgregarKeyTyped
+         if (TxtDescripcionProductoAgregar.getText().length() >= 255) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxtDescripcionProductoAgregarKeyTyped
 
     /**
      * @param args the command line arguments
      */
-
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAceptarAgregar;
